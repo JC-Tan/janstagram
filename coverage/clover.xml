@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1683050606524" clover="3.2.0">
-  <project timestamp="1683050606524" name="All files">
+<coverage generated="1683054484212" clover="3.2.0">
+  <project timestamp="1683054484212" name="All files">
     <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1" elements="8" coveredelements="8" complexity="0" loc="7" ncloc="7" packages="1" files="1" classes="1"/>
     <file name="Button.tsx" path="D:\Documents\JC Tan\Personal Projects\crud\crud-basics\app\components\Ui\Button\Button.tsx">
       <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -9,8 +9,8 @@
       <line num="19" count="1" type="stmt"/>
       <line num="23" count="1" type="stmt"/>
       <line num="24" count="1" type="stmt"/>
-      <line num="27" count="1" type="stmt"/>
-      <line num="36" count="1" type="stmt"/>
+      <line num="31" count="1" type="stmt"/>
+      <line num="40" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>

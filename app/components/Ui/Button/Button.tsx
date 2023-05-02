@@ -12,16 +12,20 @@ import {
 import { ReactNode } from "react"
 
 interface IButtonProps {
+  onClick?: () => void
   children?: ReactNode
-  [props: string]: any
 }
 
 const StyledButton = styled("button")(
   compose(border, color, flexbox, grid, layout, space, typography)
 )
 
-const Button = ({ children, props }: IButtonProps) => {
-  return <StyledButton {...props}>{children}</StyledButton>
+const Button = ({ onClick, children, ...props }: IButtonProps) => {
+  return (
+    <StyledButton {...props} onClick={onClick}>
+      {children}
+    </StyledButton>
+  )
 }
 
 StyledButton.defaultProps = {
