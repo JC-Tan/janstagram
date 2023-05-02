@@ -1,12 +1,9 @@
 import Box from "../Ui/Box/Box"
 import Button from "../Ui/Button/Button"
+import Flex from "../Ui/Flex/Flex"
 
 const Login = () => {
-  return (
-    <Box>
-      <Button>Test</Button>
-    </Box>
-  )
+  return <Box></Box>
 }
 
 export default Login
