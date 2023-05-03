@@ -3,8 +3,6 @@ import {
   border,
   color,
   compose,
-  flexbox,
-  grid,
   layout,
   space,
   typography,
@@ -17,7 +15,7 @@ interface IButtonProps {
 }
 
 const StyledButton = styled("button")(
-  compose(border, color, flexbox, grid, layout, space, typography)
+  compose(border, color, layout, space, typography)
 )
 
 const Button = ({ onClick, children, ...props }: IButtonProps) => {
