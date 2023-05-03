@@ -6,14 +6,10 @@ import {
   layout,
   space,
   typography,
-  SpaceProps,
-  FontSizeProps,
 } from "styled-system"
+import { IMainProps } from "../IMainProps"
 
-interface IInputProps
-  extends SpaceProps,
-    FontSizeProps,
-    React.InputHTMLAttributes<HTMLInputElement> {
+interface IInputProps extends IMainProps {
   borderRadius?: number
   border?: string
   onChange?: () => void
