@@ -8,8 +8,9 @@ import {
   typography,
 } from "styled-system"
 import { ReactNode } from "react"
+import { IMainProps } from "../IMainProps"
 
-interface IButtonProps {
+export interface IButtonProps extends IMainProps {
   onClick?: () => void
   children?: ReactNode
 }
