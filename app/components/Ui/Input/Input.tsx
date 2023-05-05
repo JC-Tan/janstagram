@@ -9,10 +9,10 @@ import {
 } from "styled-system"
 import { IMainProps } from "../IMainProps"
 
-interface IInputProps extends IMainProps {
+export interface IInputProps extends IMainProps {
   borderRadius?: number
   border?: string
-  onChange?: () => void
+  onChange?: (...args: any) => void
 }
 
 const StyledInput = styled("input")(

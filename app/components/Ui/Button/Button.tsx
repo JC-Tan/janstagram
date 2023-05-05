@@ -1,14 +1,17 @@
 import styled from "@emotion/styled"
 import {
   border,
+  buttonStyle,
   color,
   compose,
   layout,
   space,
   typography,
+  variant,
 } from "styled-system"
 import { ReactNode } from "react"
 import { IMainProps } from "../IMainProps"
+import theme from "../theme"
 
 export interface IButtonProps extends IMainProps {
   onClick?: () => void
@@ -16,7 +19,8 @@ export interface IButtonProps extends IMainProps {
 }
 
 const StyledButton = styled("button")(
-  compose(border, color, layout, space, typography)
+  compose(border, buttonStyle, color, layout, space, typography),
+  variant(theme)
 )
 
 const Button = ({ onClick, children, ...props }: IButtonProps) => {
@@ -28,12 +32,7 @@ const Button = ({ onClick, children, ...props }: IButtonProps) => {
 }
 
 StyledButton.defaultProps = {
-  border: "none",
-  borderRadius: "8px",
-  bg: "#0095f6",
-  color: "#ffffff",
-  padding: "7px 16px",
-  fontSize: "14px",
+  variant: "primary",
 }
 
 export default Button
