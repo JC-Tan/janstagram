@@ -10,7 +10,7 @@ export const createUser = async (user: RegisterForm) => {
       passwordHash: passwordHash,
       firstName: user.firstName,
       lastName: user.lastName,
-      userName: user.userName,
+      userName: user.username,
     },
   })
 
