@@ -1,22 +1,20 @@
 import Box from "../Ui/Box/Box"
 import Button from "../Ui/Button/Button"
 import Flex from "../Ui/Flex/Flex"
-import Label from "../Ui/Label/Label"
-import Input from "../Ui/Input/Input"
+import { Form } from "@remix-run/react"
+import InputField from "../InputField/InputField"
 
 const Login = () => {
   return (
-    <Box width="300px">
-      <Flex flexDirection="column">
-        <Flex flexDirection="column" mb={2}>
-          <Label mb={1}>Name</Label>
-          <Input></Input>
+    <Box height="100%">
+      <Flex justifyContent="center" alignItems="center">
+        <Flex flexDirection="column">
+          <Form method="post">
+            <InputField htmlFor="username" label="Username" />
+            <InputField htmlFor="username" label="Password" />
+            <Button mb={2}>Log in</Button>
+          </Form>
         </Flex>
-        <Flex flexDirection="column" mb={2}>
-          <Label mb={1}>Something</Label>
-          <Input></Input>
-        </Flex>
-        <Button mb={2}>Click!</Button>
       </Flex>
     </Box>
   )
