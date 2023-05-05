@@ -14,6 +14,5 @@ export const createUser = async (user: RegisterForm) => {
     },
   })
 
-  console.log(newUser)
   return { id: newUser.id, email: newUser.email }
 }
