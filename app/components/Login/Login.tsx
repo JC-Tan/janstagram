@@ -1,9 +1,9 @@
 import Button from '../Ui/Button/Button'
 import Flex from '../Ui/Flex/Flex'
 import Text from '../Ui/Text/Text'
-import { Form } from '@remix-run/react'
 import InputField from '../InputField/InputField'
 import { useState } from 'react'
+import { Form } from '@remix-run/react'
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -11,11 +11,20 @@ const Login = () => {
     password: '',
     firstName: '',
     lastName: '',
+    username: '',
   })
   const [action, setAction] = useState('login')
 
   const handleAction = () => {
     setAction(action === 'login' ? 'signup' : 'login')
+  }
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: string
+  ) => {
+    e.preventDefault()
+    setFormData((prevForm) => ({ ...prevForm, [field]: e.target.value }))
   }
 
   return (
@@ -34,13 +43,39 @@ const Login = () => {
         p={10}
       >
         <Form method='post'>
-          <InputField htmlFor='email' label='Email' />
-          <InputField htmlFor='password' label='Password' />
+          <InputField
+            htmlFor='email'
+            label='Email'
+            value={formData.email}
+            onChange={(e) => handleChange(e, 'email')}
+          />
+          <InputField
+            htmlFor='password'
+            label='Password'
+            type='password'
+            value={formData.password}
+            onChange={(e) => handleChange(e, 'password')}
+          />
           {action === 'signup' && (
             <>
-              <InputField htmlFor='firstName' label='First Name' />
-              <InputField htmlFor='lastName' label='Last Name' />
-              <InputField htmlFor='userName' label='Username' />
+              <InputField
+                htmlFor='firstName'
+                label='First Name'
+                value={formData.firstName}
+                onChange={(e) => handleChange(e, 'firstName')}
+              />
+              <InputField
+                htmlFor='lastName'
+                label='Last Name'
+                value={formData.lastName}
+                onChange={(e) => handleChange(e, 'lastName')}
+              />
+              <InputField
+                htmlFor='username'
+                label='Username'
+                value={formData.username}
+                onChange={(e) => handleChange(e, 'username')}
+              />
             </>
           )}
           <Button

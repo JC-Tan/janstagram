@@ -6,15 +6,24 @@ import bcrypt from 'bcryptjs'
 import { createUserSession } from './session.server'
 
 export async function register(user: RegisterForm) {
-  const res = await prisma.user.count({ where: { email: user.email } })
+  const email = await prisma.user.count({ where: { email: user.email } })
+  const username = await prisma.user.count({
+    where: { userName: user.username },
+  })
 
-  if (res) {
+  if (email) {
     return json(
       { error: 'User already exists with that email' },
       { status: 400 }
     )
   }
 
+  if (username) {
+    return json(
+      { error: 'User already exists with that username' },
+      { status: 400 }
+    )
+  }
   const newUser = await createUser(user)
 
   if (!newUser) {
@@ -36,8 +45,9 @@ export async function login({ email, password }: LoginForm) {
   const user = await prisma.user.findUnique({
     where: { email },
   })
-
-  if (!user || !(await bcrypt.compare(user.passwordHash, password))) {
+  console.log('in log in', user)
+  if (!user || !(await bcrypt.compare(password, user.passwordHash))) {
+    console.log('log in failed!')
     return json({ error: 'Incorrect login' }, { status: 400 })
   }
 

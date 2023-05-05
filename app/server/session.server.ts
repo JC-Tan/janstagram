@@ -21,13 +21,13 @@ export const sessionStorage = createCookieSessionStorage({
   },
 })
 
-
 export async function createUserSession(userId: string, redirectTo: string) {
-    const session = await sessionStorage.getSession()
-    session.set('userId', userId)
-    return redirect(redirectTo, {
-      headers: {
-        'Set-Cookie': await sessionStorage.commitSession(session),
-      },
-    })
-  }
+  console.log('in createUserSession')
+  const session = await sessionStorage.getSession()
+  session.set('userId', userId)
+  return redirect(redirectTo, {
+    headers: {
+      'Set-Cookie': await sessionStorage.commitSession(session),
+    },
+  })
+}
