@@ -34,12 +34,13 @@ const Login = () => {
         p={10}
       >
         <Form method='post'>
-          <InputField htmlFor='username' label='Username' />
+          <InputField htmlFor='email' label='Email' />
           <InputField htmlFor='password' label='Password' />
           {action === 'signup' && (
             <>
               <InputField htmlFor='firstName' label='First Name' />
               <InputField htmlFor='lastName' label='Last Name' />
+              <InputField htmlFor='userName' label='Username' />
             </>
           )}
           <Button
