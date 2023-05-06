@@ -96,6 +96,7 @@ export async function getUser(request: Request) {
 }
 
 export async function logout(request: Request) {
+  console.log('auth logout')
   const session = await getUserSession(request)
   return redirect('/login', {
     headers: {
