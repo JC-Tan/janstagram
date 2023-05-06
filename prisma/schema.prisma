@@ -19,13 +19,15 @@ model User {
   lastName     String
   profilePic   String?
   passwordHash String
-  userName     String
+  userName     String   @unique
 
   comments  Comment[]
   followers User[]    @relation("Follower")
   following User[]    @relation("Follower")
   likes     Post[]    @relation("Likes")
   posts     Post[]    @relation("UserPosts")
+
+  @@unique([email, userName])
 }
 
 model Post {

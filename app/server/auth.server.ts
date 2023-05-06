@@ -69,7 +69,7 @@ export async function requireUserId(request: Request) {
   return userId
 }
 
-async function getUserId(request: Request) {
+export async function getUserId(request: Request) {
   const session = await getUserSession(request)
   const userId = session.get('userId')
   if (!userId || typeof userId !== 'string') {
