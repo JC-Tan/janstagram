@@ -1,4 +1,4 @@
-import styled from "@emotion/styled"
+import styled from '@emotion/styled'
 import {
   border,
   buttonStyle,
@@ -8,17 +8,17 @@ import {
   space,
   typography,
   variant,
-} from "styled-system"
-import { ReactNode } from "react"
-import { IMainProps } from "../IMainProps"
-import theme from "../theme"
+} from 'styled-system'
+import { ReactNode } from 'react'
+import { IMainProps } from '../IMainProps'
+import theme from '../theme'
 
 export interface IButtonProps extends IMainProps {
-  onClick?: () => void
+  onClick?: (...args: any) => any
   children?: ReactNode
 }
 
-const StyledButton = styled("button")(
+const StyledButton = styled('button')(
   compose(border, buttonStyle, color, layout, space, typography),
   variant(theme)
 )
@@ -32,7 +32,7 @@ const Button = ({ onClick, children, ...props }: IButtonProps) => {
 }
 
 StyledButton.defaultProps = {
-  variant: "primary",
+  variant: 'primary',
 }
 
 export default Button
