@@ -1,43 +1,20 @@
 import Flex from '../Ui/Flex/Flex'
 import Button from '../Ui/Button/Button'
-import { Form } from '@remix-run/react'
-import { useState } from 'react'
+import { Form, Link } from '@remix-run/react'
 
+// Redo styling of nav bar!
 const Sidebar = () => {
-  const [value, setValue] = useState('logout') // figure this out later
-
-  const handleValue = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const val = (e.target as HTMLButtonElement).value
-    setValue(val)
-  }
   return (
-    <Form action={`/${value}`} method='post'>
+    <Form action='/logout' method='post'>
       <Flex
         borderRight='1px solid black'
         flexDirection='column'
         height='100%'
         width='275px'
       >
-        <Button
-          id='profile'
-          name='_action'
-          value='profile'
-          type='submit'
-          mx={12}
-          mt={12}
-          onClick={handleValue}
-        >
-          Profile
-        </Button>
-        <Button
-          id='logout'
-          name='_action'
-          value='logout'
-          type='submit'
-          mx={12}
-          mt={12}
-          onClick={handleValue}
-        >
+        <Link to='/'>Home</Link>
+        <Link to='/profile'>Profile</Link>
+        <Button name='_action' value='logout' type='submit' mx={12} mt={12}>
           Log out
         </Button>
       </Flex>
