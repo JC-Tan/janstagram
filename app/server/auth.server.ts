@@ -1,9 +1,13 @@
+import bcrypt from 'bcryptjs'
 import type { LoginForm, RegisterForm } from './types.server'
 import { prisma } from './prisma.server'
-import { json } from '@remix-run/node'
+import { json, redirect } from '@remix-run/node'
 import { createUser } from './user.server'
-import bcrypt from 'bcryptjs'
-import { createUserSession } from './session.server'
+import {
+  createUserSession,
+  getUserSession,
+  sessionStorage,
+} from './session.server'
 
 export async function register(user: RegisterForm) {
   const email = await prisma.user.count({ where: { email: user.email } })
@@ -50,4 +54,52 @@ export async function login({ email, password }: LoginForm) {
   }
 
   return createUserSession(user.id, '/')
+}
+
+export async function requireUserId(request: Request) {
+  const redirectTo = new URL(request.url).pathname
+  const session = await getUserSession(request)
+  const userId = session.get('userId')
+
+  if (!userId || typeof userId !== 'string') {
+    const searchParams = new URLSearchParams([['redirectTo', redirectTo]])
+    throw redirect(`/login?${searchParams}`)
+  }
+
+  return userId
+}
+
+async function getUserId(request: Request) {
+  const session = await getUserSession(request)
+  const userId = session.get('userId')
+  if (!userId || typeof userId !== 'string') {
+    return null
+  }
+  return userId
+}
+
+export async function getUser(request: Request) {
+  const userId = await getUserId(request)
+  if (typeof userId !== 'string') {
+    return null
+  }
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { id: true, email: true, userName: true },
+    })
+    return user
+  } catch {
+    throw logout(request)
+  }
+}
+
+export async function logout(request: Request) {
+  const session = await getUserSession(request)
+  return redirect('/login', {
+    headers: {
+      'Set-Cookie': await sessionStorage.destroySession(session),
+    },
+  })
 }

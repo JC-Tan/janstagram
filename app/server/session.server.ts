@@ -30,3 +30,7 @@ export async function createUserSession(userId: string, redirectTo: string) {
     },
   })
 }
+
+export function getUserSession(request: Request) {
+  return sessionStorage.getSession(request.headers.get('Cookie'))
+}
