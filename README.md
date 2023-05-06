@@ -1,3 +1,29 @@
+# Welcome to Janstagram
+
+## What is it?
+
+It's an `Instagram` clone.
+
+## TODO
+
+### Mandatory Features
+
+- [ ] Upload and view pictures
+- [ ] Users can follow/unfollow other users
+- [x] Search for other users based on username
+- [x] Log in/out
+- [ ] User feed
+- [ ] Like pictures
+
+### Other Features
+
+
+- [ ] Comment on a post
+- [ ] Notifications
+
+
+
+
 # Welcome to Remix!
 
 - [Remix Docs](https://remix.run/docs)
