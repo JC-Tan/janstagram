@@ -2,19 +2,39 @@ import Button from '../Ui/Button/Button'
 import Flex from '../Ui/Flex/Flex'
 import Text from '../Ui/Text/Text'
 import InputField from '../InputField/InputField'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Form } from '@remix-run/react'
 
-const Login = () => {
+interface ILoginProps {
+  email?: string
+  password?: string
+  firstName?: string
+  formError?: string
+  lastName?: string
+  loginErrors?: any
+  username?: string
+}
+
+const Login = ({
+  email,
+  password,
+  firstName,
+  lastName,
+  formError,
+  loginErrors,
+  username,
+}: ILoginProps) => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    username: '',
+    email: email || '',
+    password: password || '',
+    firstName: firstName || '',
+    lastName: lastName || '',
+    username: username || '',
   })
   const [action, setAction] = useState('login')
-
+  const [errors, setErrors] = useState(loginErrors || {})
+  const [formErrorState, setFormErrorState] = useState(formError || '')
+  const firstLoad = useRef(true)
   const handleAction = () => {
     setAction(action === 'login' ? 'signup' : 'login')
   }
@@ -26,6 +46,39 @@ const Login = () => {
     e.preventDefault()
     setFormData((prevForm) => ({ ...prevForm, [field]: e.target.value }))
   }
+
+  useEffect(() => {
+    if (!firstLoad.current) {
+      const newState = {
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        username: '',
+      }
+      setErrors(newState)
+      setFormErrorState('')
+      setFormData(newState)
+    }
+  }, [action])
+
+  useEffect(() => {
+    if (!firstLoad.current) {
+      setFormErrorState('')
+    }
+  }, [formData])
+
+  useEffect(() => {
+    firstLoad.current = false
+  }, [])
+
+  useEffect(() => {
+    setErrors({ ...loginErrors })
+  }, [loginErrors])
+
+  useEffect(() => {
+    formError && setFormErrorState(formError)
+  }, [formError])
 
   return (
     <Flex
@@ -43,13 +96,16 @@ const Login = () => {
         p={10}
       >
         <Form method='post'>
+          {formErrorState && <Text>{formErrorState}</Text>}
           <InputField
+            error={errors?.email}
             htmlFor='email'
             label='Email'
             value={formData.email}
             onChange={(e) => handleChange(e, 'email')}
           />
           <InputField
+            error={errors?.password}
             htmlFor='password'
             label='Password'
             type='password'
@@ -59,18 +115,21 @@ const Login = () => {
           {action === 'signup' && (
             <>
               <InputField
+                error={errors?.firstName}
                 htmlFor='firstName'
                 label='First Name'
                 value={formData.firstName}
                 onChange={(e) => handleChange(e, 'firstName')}
               />
               <InputField
+                error={errors?.lastName}
                 htmlFor='lastName'
                 label='Last Name'
                 value={formData.lastName}
                 onChange={(e) => handleChange(e, 'lastName')}
               />
               <InputField
+                error={errors?.username}
                 htmlFor='username'
                 label='Username'
                 value={formData.username}
