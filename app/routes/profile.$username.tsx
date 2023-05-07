@@ -3,7 +3,7 @@ import { useLoaderData } from '@remix-run/react'
 import Profile from '~/components/Profilepage/Profile'
 import Sidebar from '~/components/Sidebar/Sidebar'
 import Flex from '~/components/Ui/Flex/Flex'
-import { findUserByUsername } from '~/server/features/userSearch.server'
+import { findUserByUsername } from '~/server/features/search/userSearch.server'
 
 export const loader = async ({ params }: LoaderArgs) => {
   const username = params.username as string
@@ -11,17 +11,24 @@ export const loader = async ({ params }: LoaderArgs) => {
   if (!user) {
     return json({ error: `No username ${username} found` })
   }
-  return user
+  console.log('in loader')
+  return json({ user })
 }
 
 const ProfileRoute = () => {
-  const user = useLoaderData()
-
+  let { user } = useLoaderData()
   return (
     <Flex height='100%'>
       <Sidebar />
       <Flex flexDirection='column'>
-        <Profile {...user?.userName} {...user?.firstName} {...user?.lastName} />
+        <Profile
+          id={user.id}
+          bio={user.bio}
+          profilePic={user.pro}
+          userName={user.userName}
+          firstName={user.firstName}
+          lastName={user.lastName}
+        />
       </Flex>
     </Flex>
   )

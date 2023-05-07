@@ -1,16 +1,27 @@
-import { RegisterForm } from '~/server/types.server'
 import Flex from '../Ui/Flex/Flex'
 import ProfilePicture from '../ProfilePicture/ProfilePicture'
+import { User } from '@prisma/client'
+import PostsAndFollow from '../PostsAndFollow/PostsAndFollow'
+import Bio from '../Bio/Bio'
+import Username from '../Username/Username'
+import Box from '../Ui/Box/Box'
 
-interface IProfileProps extends Omit<RegisterForm, 'password' | 'email'> {
-  bio?: string
-  picUrl?: string
-}
+interface IProfile extends Omit<User, 'createdAt' | 'passwordHash' | 'email'> {}
 
-const Profile = ({ firstName, lastName, username }: IProfileProps) => {
+const Profile = ({ bio, firstName, lastName, userName }: IProfile) => {
   return (
-    <Flex>
+    <Flex height='150px' alignItems='center' mb={44}>
       <ProfilePicture />
+      <Flex alignItems='stretch' flex='2 1 30px' flexDirection='column'>
+        <Username username={userName} buttonText='Edit Profile' />
+        <Box mb={20} />
+        <PostsAndFollow />
+        <Bio
+          bio='TEST TEST TEST TEST'
+          firstname={firstName}
+          lastname={lastName}
+        />
+      </Flex>
     </Flex>
   )
 }
