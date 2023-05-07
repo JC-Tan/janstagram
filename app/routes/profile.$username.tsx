@@ -1,8 +1,8 @@
 import { LoaderArgs, json } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
+import Profile from '~/components/Profilepage/Profile'
 import Sidebar from '~/components/Sidebar/Sidebar'
 import Flex from '~/components/Ui/Flex/Flex'
-import Text from '~/components/Ui/Text/Text'
 import { findUserByUsername } from '~/server/features/userSearch.server'
 
 export const loader = async ({ params }: LoaderArgs) => {
@@ -21,10 +21,7 @@ const ProfileRoute = () => {
     <Flex height='100%'>
       <Sidebar />
       <Flex flexDirection='column'>
-        <Text>{user?.userName}</Text>
-        <Text>{user?.email}</Text>
-        <Text>{user?.firstName}</Text>
-        <Text>{user?.lastName}</Text>
+        <Profile {...user?.userName} {...user?.firstName} {...user?.lastName} />
       </Flex>
     </Flex>
   )

@@ -26,4 +26,12 @@ describe('InputField', () => {
 
     expect(mockOnChange).toBeCalled()
   })
+
+  it('should show an error message', () => {
+    render(
+      <InputField htmlFor='errorTest' label='errorTest' error='Error Error' />
+    )
+
+    expect(screen.getByText('Error Error')).toBeInTheDocument()
+  })
 })
