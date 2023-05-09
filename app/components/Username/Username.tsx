@@ -1,20 +1,42 @@
+import { useEffect, useState } from 'react'
 import Button from '../Ui/Button/Button'
 import Flex from '../Ui/Flex/Flex'
 import Text from '../Ui/Text/Text'
+import { Form, useMatches } from '@remix-run/react'
+import Input from '../Ui/Input/Input'
 
 interface IUsername {
+  id: string
+  isMyProfile: boolean
   username: string | undefined
-  buttonText: string
 }
-const Username = ({ username, buttonText }: IUsername) => {
+
+const Username = ({ id, isMyProfile, username }: IUsername) => {
+  const [buttonText, setButtonText] = useState('Edit profile')
+  const { user } = useMatches()[0].data
+  console.log(user)
+  useEffect(() => {
+    isMyProfile ? setButtonText('Edit profile') : setButtonText('follow')
+  }, [isMyProfile])
   return (
     <Flex alignItems='center'>
       <Text fontSize={20} fontWeight={400}>
         {username}
       </Text>
-      <Button height='32px' ml={20}>
-        {buttonText}
-      </Button>
+      {/* Switch this with useFetcher */}
+      <Form method='post'>
+        <Input name='id' value={id} hidden readOnly />
+        <Input name='userId' value={user.id} hidden readOnly />
+        <Button
+          type='submit'
+          name='_action'
+          value='follow'
+          height='32px'
+          ml={20}
+        >
+          {buttonText}
+        </Button>
+      </Form>
     </Flex>
   )
 }

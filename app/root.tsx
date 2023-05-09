@@ -1,4 +1,4 @@
-import type { LinksFunction } from "@remix-run/node"
+import { LinksFunction, LoaderArgs, json } from '@remix-run/node'
 import {
   Links,
   LiveReload,
@@ -6,20 +6,31 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "@remix-run/react"
-import globalStlyesUrl from "~/styles/global.css"
-import Layout from "./components/Ui/Layout/Layout"
+} from '@remix-run/react'
+import globalStlyesUrl from '~/styles/global.css'
+import Layout from './components/Ui/Layout/Layout'
+import { getUser } from './server/auth.server'
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: globalStlyesUrl },
+  { rel: 'stylesheet', href: globalStlyesUrl },
 ]
+
+export const loader = async ({ request }: LoaderArgs) => {
+  const user = await getUser(request)
+  if (!user) {
+    return json({ error: 'No user found' })
+  }
+  return json({
+    user,
+  })
+}
 
 export default function App() {
   return (
-    <html lang="en">
+    <html lang='en'>
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='width=device-width,initial-scale=1' />
         <Meta />
         <Links />
       </head>
