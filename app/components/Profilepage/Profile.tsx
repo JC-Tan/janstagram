@@ -6,14 +6,23 @@ import Bio from '../Bio/Bio'
 import Username from '../Username/Username'
 import Box from '../Ui/Box/Box'
 
-interface IProfile extends Omit<User, 'createdAt' | 'passwordHash' | 'email'> {}
+interface IProfile extends Omit<User, 'createdAt' | 'passwordHash' | 'email'> {
+  isMyProfile: boolean
+}
 
-const Profile = ({ bio, firstName, lastName, userName }: IProfile) => {
+const Profile = ({
+  bio,
+  firstName,
+  id,
+  isMyProfile,
+  lastName,
+  userName,
+}: IProfile) => {
   return (
     <Flex height='150px' alignItems='center' mb={44}>
       <ProfilePicture />
       <Flex alignItems='stretch' flex='2 1 30px' flexDirection='column'>
-        <Username username={userName} buttonText='Edit Profile' />
+        <Username id={id} username={userName} isMyProfile={isMyProfile} />
         <Box mb={20} />
         <PostsAndFollow />
         <Bio
