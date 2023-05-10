@@ -6,18 +6,26 @@ import { Form, useMatches } from '@remix-run/react'
 import Input from '../Ui/Input/Input'
 
 interface IUsername {
+  followers?: any[]
   id: string
   isMyProfile: boolean
   username: string | undefined
 }
 
-const Username = ({ id, isMyProfile, username }: IUsername) => {
+const Username = ({ followers, id, isMyProfile, username }: IUsername) => {
   const [buttonText, setButtonText] = useState('Edit profile')
   const { user } = useMatches()[0].data
-  console.log(user)
+
   useEffect(() => {
     isMyProfile ? setButtonText('Edit profile') : setButtonText('follow')
   }, [isMyProfile])
+
+  useEffect(() => {
+    const isFollowing = followers?.find((profile) => profile.id === user.id)
+    if (isFollowing) {
+      setButtonText('Unfollow')
+    }
+  })
   return (
     <Flex alignItems='center'>
       <Text fontSize={20} fontWeight={400}>

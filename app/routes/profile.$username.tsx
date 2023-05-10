@@ -35,19 +35,12 @@ export const action = async ({ request }: ActionArgs) => {
 
 const ProfileRoute = () => {
   let { otherUser } = useLoaderData()
+
   return (
     <Flex height='100%'>
       <Sidebar />
       <Flex flexDirection='column'>
-        <Profile
-          bio={otherUser.bio}
-          firstName={otherUser.firstName}
-          id={otherUser.id}
-          isMyProfile={false}
-          lastName={otherUser.lastName}
-          profilePic={otherUser.pro}
-          userName={otherUser.userName}
-        />
+        <Profile isMyProfile={false} {...otherUser} />
       </Flex>
     </Flex>
   )

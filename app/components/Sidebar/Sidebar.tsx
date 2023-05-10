@@ -8,8 +8,10 @@ import InputField from '../InputField/InputField'
 const Sidebar = () => {
   const [profile, setProfile] = useState('')
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    setProfile(e.target.value)
+    const input = e.target.value
+    if (input !== '') {
+      setProfile(e.target.value)
+    }
   }
   return (
     <Flex
@@ -21,7 +23,7 @@ const Sidebar = () => {
     >
       <Link to='/'>Home</Link>
       <Link to={`/profile`}>Profile</Link>
-      <Link to={`/profile/${profile}`}>
+      <Link to={`/profile${profile === '' ? '' : `/${profile}`}`}>
         <InputField htmlFor='profile' label='' onChange={handleChange} />
       </Link>
       <Form action='/logout' method='post'>
