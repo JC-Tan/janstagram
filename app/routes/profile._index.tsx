@@ -12,8 +12,10 @@ const ProfileRoute = () => {
   return (
     <Flex height='100%'>
       <Sidebar />
-      <Flex flexDirection='column'>
-        <Profile isMyProfile={true} {...user} />
+      <Flex width='100%' justifyContent='center'>
+        <Flex flexDirection='column'>
+          <Profile isMyProfile={true} {...user} />
+        </Flex>
       </Flex>
     </Flex>
   )

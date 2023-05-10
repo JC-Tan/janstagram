@@ -3,7 +3,7 @@ import { useLoaderData } from '@remix-run/react'
 import Profile from '~/components/Profilepage/Profile'
 import Sidebar from '~/components/Sidebar/Sidebar'
 import Flex from '~/components/Ui/Flex/Flex'
-import { follow } from '~/server/features/follow/followUser.server'
+import { follow, unfollow } from '~/server/features/follow/followUser.server'
 import { findUserByUsername } from '~/server/features/search/userSearch.server'
 
 export const loader = async ({ params }: LoaderArgs) => {
@@ -21,16 +21,28 @@ export const action = async ({ request }: ActionArgs) => {
   const id = form.get('id') as string
   const userId = form.get('userId') as string
 
-  if (action === 'follow') {
-    const res = await follow(userId, id)
-
-    if (!res) {
-      return json({ error: 'Something went wrong with following another user' })
-    }
-
-    return json({ res })
+  switch (action) {
+    case 'Follow':
+      const followRes = await follow(userId, id)
+      if (!followRes) {
+        return json({
+          error: 'Something went wrong with following another user',
+        })
+      }
+      return json({ followRes })
+    case 'Unfollow':
+      const unfollowRes = await unfollow(userId, id)
+      if (!unfollowRes) {
+        return json({
+          error: 'Something went wrong with following another user',
+        })
+      }
+      return json({ unfollowRes })
+    default:
+      return json({
+        error: 'Invalid follow action',
+      })
   }
-  return null
 }
 
 const ProfileRoute = () => {
@@ -39,8 +51,10 @@ const ProfileRoute = () => {
   return (
     <Flex height='100%'>
       <Sidebar />
-      <Flex flexDirection='column'>
-        <Profile isMyProfile={false} {...otherUser} />
+      <Flex width='100%' justifyContent='center'>
+        <Flex flexDirection='column'>
+          <Profile isMyProfile={false} {...otherUser} />
+        </Flex>
       </Flex>
     </Flex>
   )
