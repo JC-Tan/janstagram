@@ -17,15 +17,14 @@ const Username = ({ followers, id, isMyProfile, username }: IUsername) => {
   const { user } = useMatches()[0].data
 
   useEffect(() => {
-    isMyProfile ? setButtonText('Edit profile') : setButtonText('follow')
+    isMyProfile ? setButtonText('Edit profile') : setButtonText('Follow')
   }, [isMyProfile])
 
   useEffect(() => {
     const isFollowing = followers?.find((profile) => profile.id === user.id)
-    if (isFollowing) {
-      setButtonText('Unfollow')
-    }
-  })
+    setButtonText(isFollowing ? 'Unfollow' : 'Follow')
+  }, [followers])
+
   return (
     <Flex alignItems='center'>
       <Text fontSize={20} fontWeight={400}>
@@ -38,7 +37,7 @@ const Username = ({ followers, id, isMyProfile, username }: IUsername) => {
         <Button
           type='submit'
           name='_action'
-          value='follow'
+          value={buttonText}
           height='32px'
           ml={20}
         >
