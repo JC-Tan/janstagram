@@ -9,7 +9,7 @@ It's an `Instagram` clone.
 ### Mandatory Features
 
 - [ ] Upload and view pictures
-- [ ] Users can follow/unfollow other users
+- [x] Users can follow/unfollow other users
 - [x] Search for other users based on username
 - [x] Log in/out
 - [ ] User feed
