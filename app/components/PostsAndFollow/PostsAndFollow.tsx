@@ -1,19 +1,29 @@
-import { User, Post } from '@prisma/client'
 import Flex from '../Ui/Flex/Flex'
 import Text from '../Ui/Text/Text'
-import { useState } from 'react'
-import { Link } from '@remix-run/react'
+import { useEffect, useState } from 'react'
 
 interface IPosts {
-  posts?: Post[]
-  followers?: User[]
-  following?: User[]
+  posts?: any[]
+  followers?: any[]
+  following?: any[]
 }
 
 const PostsAndFollow = ({ posts, followers, following }: IPosts) => {
   const [numPosts, setNumPosts] = useState(posts?.length || 0)
   const [numFollowers, setNumFollowers] = useState(followers?.length || 0)
   const [numFollowing, setNumFollowing] = useState(following?.length || 0)
+
+  useEffect(() => {
+    setNumPosts(posts?.length || 0)
+  }, [posts])
+
+  useEffect(() => {
+    setNumFollowers(followers?.length || 0)
+  }, [followers])
+
+  useEffect(() => {
+    setNumFollowing(following?.length || 0)
+  }, [following])
 
   return (
     <Flex flexDirection='row' mb={20}>
