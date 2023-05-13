@@ -1,17 +1,23 @@
 import Flex from '../Ui/Flex/Flex'
 import Button from '../Ui/Button/Button'
 import { Form, Link } from '@remix-run/react'
-import { useState } from 'react'
-import InputField from '../InputField/InputField'
+import { useEffect, useRef, useState } from 'react'
 import ImageUploader from '../ImageUploader/ImageUploader'
+import Input from '../Ui/Input/Input'
 
 // Redo styling of nav bar!
 const Sidebar = () => {
   const [profile, setProfile] = useState('')
+  let formRef = useRef<HTMLFormElement | null>(null)
+
+  useEffect(() => {
+    formRef.current?.reset()
+  }, [])
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value
     if (input !== '') {
-      setProfile(e.target.value)
+      setProfile(`/${input.toLowerCase()}`)
     }
   }
 
@@ -25,9 +31,9 @@ const Sidebar = () => {
     >
       <Link to='/'>Home</Link>
       <Link to={`/profile`}>Profile</Link>
-      <Link to={`/profile${profile === '' ? '' : `/${profile}`}`}>
-        <InputField htmlFor='profile' label='' onChange={handleChange} />
-      </Link>
+      <Form ref={formRef} action={`/profile${profile}`}>
+        <Input placeholder='Search' onChange={handleChange} />
+      </Form>
       <Form method='post'>
         <ImageUploader />
       </Form>

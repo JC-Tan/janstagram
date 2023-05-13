@@ -13,7 +13,6 @@ export const loader = async ({ request }: DataFunctionArgs) => {
 export const action = async ({ request }: ActionArgs) => {
   const form = await request.formData()
   const action = form.get('_action')
-
   return null
 }
 
