@@ -3,6 +3,7 @@ import { useLoaderData } from '@remix-run/react'
 import Profile from '~/components/Profilepage/Profile'
 import Sidebar from '~/components/Sidebar/Sidebar'
 import Flex from '~/components/Ui/Flex/Flex'
+import Text from '~/components/Ui/Text/Text'
 import { follow, unfollow } from '~/server/features/follow/followUser.server'
 import { findUserByUsername } from '~/server/features/search/userSearch.server'
 
@@ -34,7 +35,7 @@ export const action = async ({ request }: ActionArgs) => {
       const unfollowRes = await unfollow(userId, id)
       if (!unfollowRes) {
         return json({
-          error: 'Something went wrong with following another user',
+          error: 'Something went wrong with unfollowing another user',
         })
       }
       return json({ unfollowRes })
@@ -53,7 +54,11 @@ const ProfileRoute = () => {
       <Sidebar />
       <Flex width='100%' justifyContent='center'>
         <Flex flexDirection='column'>
-          <Profile isMyProfile={false} {...otherUser} />
+          {otherUser ? (
+            <Profile isMyProfile={false} {...otherUser} />
+          ) : (
+            <Text>User does not exist. This should have its own page</Text>
+          )}
         </Flex>
       </Flex>
     </Flex>
