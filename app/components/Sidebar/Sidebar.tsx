@@ -3,6 +3,7 @@ import Button from '../Ui/Button/Button'
 import { Form, Link } from '@remix-run/react'
 import { useState } from 'react'
 import InputField from '../InputField/InputField'
+import ImageUploader from '../ImageUploader/ImageUploader'
 
 // Redo styling of nav bar!
 const Sidebar = () => {
@@ -13,6 +14,7 @@ const Sidebar = () => {
       setProfile(e.target.value)
     }
   }
+
   return (
     <Flex
       borderRight='1px solid black'
@@ -26,6 +28,9 @@ const Sidebar = () => {
       <Link to={`/profile${profile === '' ? '' : `/${profile}`}`}>
         <InputField htmlFor='profile' label='' onChange={handleChange} />
       </Link>
+      <Form method='post'>
+        <ImageUploader />
+      </Form>
       <Form action='/logout' method='post'>
         <Button name='_action' value='logout' type='submit' mt={12}>
           Log out
