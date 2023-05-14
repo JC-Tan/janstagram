@@ -22,7 +22,7 @@ const Username = ({ followers, id, isMyProfile, username }: IUsername) => {
 
   useEffect(() => {
     const isFollowing = followers?.find((profile) => profile.id === user.id)
-    setButtonText(isFollowing ? 'Unfollow' : 'Follow')
+    !isMyProfile && setButtonText(isFollowing ? 'Unfollow' : 'Follow')
   }, [followers])
 
   return (
