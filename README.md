@@ -8,18 +8,20 @@ It's an `Instagram` clone.
 
 ### Mandatory Features
 
-- [ ] Upload and view pictures
+- [x] Upload and see pictures in profile
+- [ ] Click on picture and see caption
 - [x] Users can follow/unfollow other users
 - [x] Search for other users based on username
 - [x] Log in/out
 - [ ] User feed
 - [ ] Like pictures
+- [ ] TEST FILES lol
 
 ### Other Features
 
 
 - [ ] Comment on a post
-- [ ] Notifications
+- [ ] Notifications (?)
 
 
 
