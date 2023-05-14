@@ -8,6 +8,7 @@ import Input from '../Ui/Input/Input'
 // Redo styling of nav bar!
 const Sidebar = () => {
   const [profile, setProfile] = useState('')
+  const [imageFile, setImageFile] = useState<File | null>(null)
   let formRef = useRef<HTMLFormElement | null>(null)
 
   useEffect(() => {
@@ -19,6 +20,10 @@ const Sidebar = () => {
     if (input !== '') {
       setProfile(`/${input.toLowerCase()}`)
     }
+  }
+
+  const handleFile = (file: File) => {
+    setImageFile(file)
   }
 
   return (
@@ -34,9 +39,7 @@ const Sidebar = () => {
       <Form ref={formRef} action={`/profile${profile}`}>
         <Input placeholder='Search' onChange={handleChange} />
       </Form>
-      <Form method='post'>
-        <ImageUploader />
-      </Form>
+      <ImageUploader />
       <Form action='/logout' method='post'>
         <Button name='_action' value='logout' type='submit' mt={12}>
           Log out
