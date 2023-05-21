@@ -1,5 +1,4 @@
-import Flex from '../Ui/Flex/Flex'
-import Text from '../Ui/Text/Text'
+import { Flex, Text } from 'pcln-design-system'
 import { useEffect, useState } from 'react'
 
 interface IPosts {

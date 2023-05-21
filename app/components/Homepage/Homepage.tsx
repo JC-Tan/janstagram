@@ -1,5 +1,5 @@
 import Sidebar from '../Sidebar/Sidebar'
-import Flex from '../Ui/Flex/Flex'
+import { Flex } from 'pcln-design-system'
 const Homepage = () => {
   return (
     <Flex flexDirection='row' height='100%'>
