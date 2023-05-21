@@ -1,9 +1,7 @@
-import Flex from '../Ui/Flex/Flex'
-import Button from '../Ui/Button/Button'
+import { Button, Flex, Input } from 'pcln-design-system'
 import { Form, Link } from '@remix-run/react'
 import { useEffect, useRef, useState } from 'react'
 import ImageUploader from '../ImageUploader/ImageUploader'
-import Input from '../Ui/Input/Input'
 
 // Redo styling of nav bar!
 const Sidebar = () => {
@@ -27,13 +25,7 @@ const Sidebar = () => {
   }
 
   return (
-    <Flex
-      borderRight='1px solid black'
-      flexDirection='column'
-      height='100%'
-      width='275px'
-      p={12}
-    >
+    <Flex flexDirection='column' height='100%' width='275px' p={12}>
       <Link to='/'>Home</Link>
       <Link to={`/profile`}>Profile</Link>
       <Form ref={formRef} action={`/profile${profile}`}>

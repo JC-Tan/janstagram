@@ -1,10 +1,9 @@
-import Flex from '../Ui/Flex/Flex'
+import { Box, Flex } from 'pcln-design-system'
 import ProfilePicture from '../ProfilePicture/ProfilePicture'
 import { User } from '@prisma/client'
 import PostsAndFollow from '../PostsAndFollow/PostsAndFollow'
 import Bio from '../Bio/Bio'
 import Username from '../Username/Username'
-import Box from '../Ui/Box/Box'
 import { useEffect, useState } from 'react'
 import { createClient } from '@supabase/supabase-js'
 
@@ -43,7 +42,6 @@ const Profile = ({
         sortBy: { column: 'name', order: 'asc' },
       })
 
-    console.log(data)
     if (data) {
       setMedia(data)
     } else {
@@ -57,7 +55,7 @@ const Profile = ({
     <Flex flexDirection='column'>
       <Flex height='150px' alignItems='center' mb={44}>
         <ProfilePicture />
-        <Flex alignItems='stretch' flex='2 1 30px' flexDirection='column'>
+        <Flex alignItems='stretch' flexDirection='column'>
           <Username
             id={id}
             username={userName}

@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
-import Button from '../Ui/Button/Button'
-import Flex from '../Ui/Flex/Flex'
-import Text from '../Ui/Text/Text'
+import { Button, Flex, Input, Text } from 'pcln-design-system'
 import { Form, useMatches } from '@remix-run/react'
-import Input from '../Ui/Input/Input'
 
 interface IUsername {
   followers?: any[]
@@ -32,15 +29,9 @@ const Username = ({ followers, id, isMyProfile, username }: IUsername) => {
       </Text>
       {/* Switch this with useFetcher */}
       <Form method='post'>
-        <Input name='id' value={id} hidden readOnly />
-        <Input name='userId' value={user.id} hidden readOnly />
-        <Button
-          type='submit'
-          name='_action'
-          value={buttonText}
-          height='32px'
-          ml={20}
-        >
+        <Input name='id' value={id} type='hidden' readOnly />
+        <Input name='userId' value={user.id} type='hidden' readOnly />
+        <Button type='submit' name='_action' value={buttonText} ml={20}>
           {buttonText}
         </Button>
       </Form>
