@@ -1,5 +1,5 @@
 import { ActionArgs, LoaderArgs, json } from '@remix-run/node'
-import { useLoaderData } from '@remix-run/react'
+import { useLoaderData, useMatches } from '@remix-run/react'
 import Profile from '~/components/Profilepage/Profile'
 import Sidebar from '~/components/Sidebar/Sidebar'
 import Flex from '~/components/Ui/Flex/Flex'
@@ -48,10 +48,11 @@ export const action = async ({ request }: ActionArgs) => {
 
 const ProfileRoute = () => {
   let { otherUser } = useLoaderData()
+  const { ENV } = useMatches()[0].data
 
   return (
     <Flex height='100%'>
-      <Sidebar />
+      <Sidebar supabaseUrl={ENV.SUPABASE_URL} supabaseKey={ENV.SUPABASE_KEY} />
       <Flex width='100%' justifyContent='center'>
         <Flex flexDirection='column'>
           {otherUser ? (
