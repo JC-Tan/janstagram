@@ -20,8 +20,13 @@ export const loader = async ({ request }: LoaderArgs) => {
   if (!user) {
     return json({ error: 'No user found' })
   }
+
   return json({
     user,
+    ENV: {
+      SUPABASE_URL: process.env.SUPABASE_URL,
+      SUPABASE_KEY: process.env.SUPABASE_KEY,
+    },
   })
 }
 
