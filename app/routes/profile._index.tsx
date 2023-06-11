@@ -27,17 +27,23 @@ export const action = async ({ request }: ActionArgs) => {
 }
 
 const ProfileRoute = () => {
-  const { user } = useMatches()[0].data
+  const { user, ENV } = useMatches()[0].data
 
+  console.log(ENV.SUPABASE_KEY)
   if (!user) {
     return
   }
   return (
     <Flex height='100%'>
-      <Sidebar />
+      <Sidebar supabaseUrl={ENV.SUPABASE_URL} supabaseKey={ENV.SUPABASE_KEY} />
       <Flex width='100%' justifyContent='center'>
         <Flex flexDirection='column'>
-          <Profile isMyProfile={true} {...user} />
+          <Profile
+            isMyProfile={true}
+            {...user}
+            supabaseUrl={ENV.SUPABASE_URL}
+            supabaseKey={ENV.SUPABASE_KEY}
+          />
         </Flex>
       </Flex>
     </Flex>
