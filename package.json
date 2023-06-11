@@ -3,12 +3,13 @@
   "sideEffects": false,
   "scripts": {
     "build": "remix build",
+    "build-storybook": "storybook build",
     "dev": "remix dev",
     "initJest": "jest --init",
-    "typecheck": "tsc",
-    "test": "jest --silent",
+    "postinstall": "prisma generate",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "typecheck": "tsc",
+    "test": "jest --silent"
   },
   "dependencies": {
     "@emotion/react": "^11.10.8",
