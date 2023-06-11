@@ -1,9 +1,14 @@
 node_modules
 
-/.cache
-/build
-/public/build
-.env
-
 /coverage.data
 /coverage/
+
+.cache
+.env
+.vercel
+.output
+
+/build/
+/public/build
+/api/index.js
+/api/index.js.map
