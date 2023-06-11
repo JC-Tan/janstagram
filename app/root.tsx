@@ -8,8 +8,8 @@ import {
   ScrollRestoration,
 } from '@remix-run/react'
 import globalStlyesUrl from '~/styles/global.css'
+import Layout from './components/Ui/Layout/Layout'
 import { getUser } from './server/auth.server'
-import { ThemeProvider } from 'pcln-design-system'
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: globalStlyesUrl },
@@ -35,12 +35,12 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <ThemeProvider>
+        <Layout>
           <Outlet />
           <ScrollRestoration />
           <Scripts />
           <LiveReload />
-        </ThemeProvider>
+        </Layout>
       </body>
     </html>
   )

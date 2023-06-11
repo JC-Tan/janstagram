@@ -1,17 +1,14 @@
 import { useRef, useState } from 'react'
-import { Box, Button, Input } from 'pcln-design-system'
+import Input from '../Ui/Input/Input'
+import Button from '../Ui/Button'
+import Box from '../Ui/Box/Box'
 import { v4 as uuidv4 } from 'uuid'
 import { Form, useMatches } from '@remix-run/react'
 import Post from '../Post/Post'
-import styled from 'styled-components'
 
 interface IImageUploader {
   onChange?: (file: File) => any
 }
-
-const HiddenInput = styled(Input)`
-  display: none;
-`
 
 const ImageUploader = ({ onChange }: IImageUploader) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
@@ -44,12 +41,13 @@ const ImageUploader = ({ onChange }: IImageUploader) => {
   return (
     <Box>
       <Form method='post'>
-        <HiddenInput
+        <Input
           type='file'
           name='inputFile'
           ref={fileInputRef}
           accept='image/*'
           onChange={handleChange}
+          hidden
         />
         <Button mt={12} onClick={handleClick}>
           Create
