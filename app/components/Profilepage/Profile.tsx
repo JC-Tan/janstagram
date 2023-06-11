@@ -8,15 +8,13 @@ import Box from '../Ui/Box/Box'
 import { useEffect, useState } from 'react'
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = 'https://unpdnaliobtmmjqonfhw.supabase.co/'
-const supabaseKey =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVucGRuYWxpb2J0bW1qcW9uZmh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODM4MTgxNTAsImV4cCI6MTk5OTM5NDE1MH0.1J5ST8NSbVKK71md_Rj16FP4Om-8onnP6DKq3lPv4XY'
-const supabase = createClient(supabaseUrl, supabaseKey)
 interface IProfile extends Omit<User, 'createdAt' | 'passwordHash' | 'email'> {
   followers?: any
   following?: any
   isMyProfile: boolean
   posts?: any
+  supabaseUrl: string
+  supabaseKey: string
 }
 
 const Profile = ({
@@ -28,8 +26,11 @@ const Profile = ({
   isMyProfile,
   lastName,
   posts,
+  supabaseUrl,
+  supabaseKey,
   userName,
 }: IProfile) => {
+  const supabase = createClient(supabaseUrl, supabaseKey)
   const [media, setMedia] = useState<any>([])
 
   useEffect(() => {

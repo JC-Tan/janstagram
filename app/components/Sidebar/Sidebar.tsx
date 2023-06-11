@@ -5,8 +5,13 @@ import { useEffect, useRef, useState } from 'react'
 import ImageUploader from '../ImageUploader/ImageUploader'
 import Input from '../Ui/Input/Input'
 
+interface ISidebar {
+  supabaseUrl: string
+  supabaseKey: string
+}
+
 // Redo styling of nav bar!
-const Sidebar = () => {
+const Sidebar = ({ supabaseKey, supabaseUrl }: ISidebar) => {
   const [profile, setProfile] = useState('')
   const [imageFile, setImageFile] = useState<File | null>(null)
   let formRef = useRef<HTMLFormElement | null>(null)
@@ -39,7 +44,7 @@ const Sidebar = () => {
       <Form ref={formRef} action={`/profile${profile}`}>
         <Input placeholder='Search' onChange={handleChange} />
       </Form>
-      <ImageUploader />
+      <ImageUploader supabaseUrl={supabaseUrl} supabaseKey={supabaseUrl} />
       <Form action='/logout' method='post'>
         <Button name='_action' value='logout' type='submit' mt={12}>
           Log out

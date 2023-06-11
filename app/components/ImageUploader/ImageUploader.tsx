@@ -7,10 +7,16 @@ import { Form, useMatches } from '@remix-run/react'
 import Post from '../Post/Post'
 
 interface IImageUploader {
+  supabaseUrl: string
+  supabaseKey: string
   onChange?: (file: File) => any
 }
 
-const ImageUploader = ({ onChange }: IImageUploader) => {
+const ImageUploader = ({
+  supabaseKey,
+  supabaseUrl,
+  onChange,
+}: IImageUploader) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const dropRef = useRef(null)
   const [imageUrl, setImageUrl] = useState('')
@@ -57,6 +63,8 @@ const ImageUploader = ({ onChange }: IImageUploader) => {
             userId={user.id}
             inputFile={inputFile}
             fileUrl={imageUrl}
+            supabaseKey={supabaseKey}
+            supabaseUrl={supabaseUrl}
             uploadUrl={uploadUrl}
             onClose={handleClose}
           />
