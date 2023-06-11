@@ -49,7 +49,6 @@ export const action = async ({ request }: ActionArgs) => {
 const ProfileRoute = () => {
   let { otherUser } = useLoaderData()
   const { ENV } = useMatches()[0].data
-
   return (
     <Flex height='100%'>
       <Sidebar supabaseUrl={ENV.SUPABASE_URL} supabaseKey={ENV.SUPABASE_KEY} />
