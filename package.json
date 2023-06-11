@@ -9,7 +9,8 @@
     "postinstall": "prisma generate",
     "storybook": "storybook dev -p 6006",
     "typecheck": "tsc",
-    "test": "jest --silent"
+    "test": "jest --silent",
+    "vercel-build": "prisma generate && prisma migrate deploy && remix build"
   },
   "dependencies": {
     "@emotion/react": "^11.10.8",
