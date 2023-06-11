@@ -1,9 +1,9 @@
 import { useMatches } from '@remix-run/react'
 import Sidebar from '~/components/Sidebar'
+import Flex from '~/components/Ui/Flex'
 import Profile from '~/components/Profilepage'
 import { ActionArgs } from '@remix-run/node'
 import { deletePost, post } from '~/server/features/post/post.server'
-import { Flex } from 'pcln-design-system'
 
 export const action = async ({ request }: ActionArgs) => {
   const form = await request.formData()
@@ -33,7 +33,7 @@ const ProfileRoute = () => {
     return
   }
   return (
-    <Flex flexDirection='row'>
+    <Flex height='100%'>
       <Sidebar />
       <Flex width='100%' justifyContent='center'>
         <Flex flexDirection='column'>

@@ -1,4 +1,6 @@
-import { Button, Flex, Text } from 'pcln-design-system'
+import Button from '../Ui/Button/Button'
+import Flex from '../Ui/Flex/Flex'
+import Text from '../Ui/Text/Text'
 import InputField from '../InputField/InputField'
 import { useEffect, useRef, useState } from 'react'
 import { Form } from '@remix-run/react'
@@ -87,6 +89,7 @@ const Login = ({
     >
       <Flex
         alignItems='center'
+        border='1px solid #cccccc'
         flexDirection='column'
         width='350px'
         my={10}
@@ -145,7 +148,13 @@ const Login = ({
           </Button>
         </Form>
       </Flex>
-      <Flex width='350px' my={10} p={10} justifyContent='center'>
+      <Flex
+        border='1px solid #cccccc'
+        width='350px'
+        my={10}
+        p={10}
+        justifyContent='center'
+      >
         {/* Temporary! This should bring us to sign up route!*/}
         <Text fontSize={14} textAlign='15px' lineHeight='18px' m={15}>
           Don't have account?

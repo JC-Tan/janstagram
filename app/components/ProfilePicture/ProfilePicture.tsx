@@ -1,4 +1,5 @@
-import { Flex, Image } from 'pcln-design-system'
+import Flex from '../Ui/Flex'
+import Image from '../Ui/Image/Image'
 
 interface IProfilePictureProps {
   url?: string
@@ -13,7 +14,7 @@ const ProfilePicture = ({ url }: IProfilePictureProps) => {
       justifyContent='center'
       alignItems='center'
     >
-      <Image height='150px' width='150px' src={url ? url : '/defaultPfP.jpg'} />
+      <Image height='150px' width='150px' url={url ? url : '/defaultPfP.jpg'} />
     </Flex>
   )
 }

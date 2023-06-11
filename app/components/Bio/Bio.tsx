@@ -1,4 +1,5 @@
-import { Flex, Text } from 'pcln-design-system'
+import Flex from '../Ui/Flex'
+import Text from '../Ui/Text/Text'
 
 interface IBio {
   bio?: string | null

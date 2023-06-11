@@ -1,4 +1,7 @@
-import { Flex, Input, Label, Text } from 'pcln-design-system'
+import Flex from '../Ui/Flex/Flex'
+import Input from '../Ui/Input/Input'
+import Label from '../Ui/Label/Label'
+import Text from '../Ui/Text/Text'
 import { useEffect, useState } from 'react'
 
 export interface IInputField {
