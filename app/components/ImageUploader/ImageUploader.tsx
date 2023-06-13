@@ -59,7 +59,9 @@ const ImageUploader = ({
         <Button mt={12} onClick={handleClick}>
           Create
         </Button>
-        <Modal isOpen={isShown}>
+      </Form>
+      <Modal isOpen={isShown}>
+        <Form method='post'>
           <Post
             userId={user.id}
             inputFile={inputFile}
@@ -69,8 +71,8 @@ const ImageUploader = ({
             uploadUrl={uploadUrl}
             onClose={handleClose}
           />
-        </Modal>
-      </Form>
+        </Form>
+      </Modal>
     </Box>
   )
 }
