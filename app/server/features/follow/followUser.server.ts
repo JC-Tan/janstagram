@@ -34,7 +34,6 @@ export const follow = async (userId: string, otherId: string) => {
 }
 
 export const unfollow = async (userId: string, otherId: string) => {
-  console.log('unfollow')
   const unfollowingRes = await prisma.user.update({
     where: {
       id: otherId,
@@ -67,7 +66,5 @@ export const unfollow = async (userId: string, otherId: string) => {
     })
   }
 
-  console.log('unfollowingRes: ', unfollowingRes)
-  console.log('unfollowerRes: ', unfollowerRes)
   return json({ unfollowingRes, unfollowerRes })
 }

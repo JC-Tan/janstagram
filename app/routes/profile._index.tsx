@@ -12,7 +12,6 @@ export const action = async ({ request }: ActionArgs) => {
   let url = form.get('uploadUrl')
   let bio = form.get('bio')
 
-  console.log('userId in action:', userId)
   if (action === 'share') {
     userId = userId as string
     url = url as string
@@ -29,7 +28,6 @@ export const action = async ({ request }: ActionArgs) => {
 const ProfileRoute = () => {
   const { user, ENV } = useMatches()[0].data
 
-  console.log(ENV.SUPABASE_KEY)
   if (!user) {
     return
   }

@@ -46,16 +46,14 @@ const Profile = ({
         sortBy: { column: 'name', order: 'asc' },
       })
 
-    console.log(data)
     if (data) {
       setMedia(data)
     } else {
-      console.log('error:', error)
     }
   }
 
   const imgUrl = supabaseUrl + 'storage/v1/object/public/images/' + userName
-  console.log(imgUrl)
+
   return (
     <Flex flexDirection='column'>
       <Flex height='150px' alignItems='center' mb={44}>
@@ -83,7 +81,6 @@ const Profile = ({
       <Flex flexDirection='row'>
         {media.map((e: any, idx: number) => {
           const url = imgUrl + '/' + e.name
-          console.log(url)
           return <img width={310} height={310} key={idx} src={url} />
         })}
       </Flex>
