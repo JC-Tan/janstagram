@@ -3,7 +3,7 @@ import Sidebar from '~/components/Sidebar'
 import Flex from '~/components/Ui/Flex'
 import Profile from '~/components/Profilepage'
 import { ActionArgs } from '@remix-run/node'
-import { deletePost, post } from '~/server/features/post/post.server'
+import { post } from '~/server/features/post/post.server'
 
 export const action = async ({ request }: ActionArgs) => {
   const form = await request.formData()
@@ -17,10 +17,6 @@ export const action = async ({ request }: ActionArgs) => {
     url = url as string
     bio = bio as string
     return await post(userId, url, bio)
-  }
-  if (action === 'delete') {
-    userId = userId as string
-    return await deletePost(userId)
   }
   return null
 }
