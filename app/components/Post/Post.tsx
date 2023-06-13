@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import Button from '../Ui/Button'
 import Input from '../Ui/Input'
 import { createClient } from '@supabase/supabase-js'
+import Image from '../Ui/Image/Image'
 
 interface IPost {
   inputFile: File
@@ -15,20 +16,6 @@ interface IPost {
   userId: string
   onClose: () => void
 }
-
-const StyledFlex = styled(Flex)`
-  background-color: rgb(39, 39, 39);
-  bottom: 0;
-  box-sizing: border-box;
-  height: 800px;
-  left: 0;
-  overflow-y: auto;
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 1050px;
-  z-index: 100;
-`
 
 const StyledTextArea = styled('textarea')`
   resize: none;
@@ -69,9 +56,9 @@ const Post = ({
   }
 
   return (
-    <StyledFlex flexDirection='row' borderRadius={12}>
+    <Flex flexDirection='row'>
       <Flex height='700px' width='700px'>
-        <img src={fileUrl} />
+        <Image url={fileUrl} />
       </Flex>
       <Flex flexDirection='column'>
         <Flex flexDirection='column' width='350px' height='450px'>
@@ -91,15 +78,11 @@ const Post = ({
         >
           Share
         </Button>
-
-        <Button name='_action' value='delete' type='submit' my={20}>
-          Delete
-        </Button>
         <Button mb={20} onClick={onClose}>
           Close me
         </Button>
       </Flex>
-    </StyledFlex>
+    </Flex>
   )
 }
 

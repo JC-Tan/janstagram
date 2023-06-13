@@ -1,10 +1,15 @@
-import Box from "../Box/Box"
+import Box from '../Box/Box'
 
 interface ILayoutProps {
+  id: string
   children?: React.ReactNode
 }
-const Layout = ({ children }: ILayoutProps) => {
-  return <Box height="100%">{children}</Box>
+const Layout = ({ id, children }: ILayoutProps) => {
+  return (
+    <Box id={id} height='100%'>
+      {children}
+    </Box>
+  )
 }
 
 export default Layout
