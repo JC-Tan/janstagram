@@ -44,7 +44,7 @@ const Sidebar = ({ supabaseKey, supabaseUrl }: ISidebar) => {
       <Form ref={formRef} action={`/profile${profile}`}>
         <Input placeholder='Search' onChange={handleChange} />
       </Form>
-      <ImageUploader supabaseUrl={supabaseUrl} supabaseKey={supabaseUrl} />
+      <ImageUploader supabaseUrl={supabaseUrl} supabaseKey={supabaseKey} />
       <Form action='/logout' method='post'>
         <Button name='_action' value='logout' type='submit' mt={12}>
           Log out

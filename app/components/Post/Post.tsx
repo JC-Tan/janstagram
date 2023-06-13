@@ -57,12 +57,14 @@ const Post = ({
       const { data, error } = await supabase.storage
         .from('images')
         .upload(uploadUrl, inputFile)
+
       if (data) {
+        console.log('upload successful')
       } else {
         throw new Error(error.message)
       }
-    } catch {
-      throw new Error('Something went wrong with connecting to supabase!')
+    } catch (e) {
+      throw new Error('Something went wrong with connecting to supabase!' + e)
     }
   }
 
