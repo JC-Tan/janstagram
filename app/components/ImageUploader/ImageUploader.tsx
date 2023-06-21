@@ -4,8 +4,8 @@ import Button from '../Ui/Button'
 import Box from '../Ui/Box/Box'
 import { v4 as uuidv4 } from 'uuid'
 import { Form, useMatches } from '@remix-run/react'
-import Post from '../Post/Post'
 import Modal from '../Ui/Modal/Modal'
+import CreatePost from '../CreatePost/CreatePost'
 
 interface IImageUploader {
   supabaseUrl: string
@@ -62,7 +62,7 @@ const ImageUploader = ({
       </Form>
       <Modal isOpen={isShown}>
         <Form method='post'>
-          <Post
+          <CreatePost
             userId={user.id}
             inputFile={inputFile}
             fileUrl={imageUrl}
