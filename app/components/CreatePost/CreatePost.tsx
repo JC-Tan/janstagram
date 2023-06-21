@@ -22,7 +22,7 @@ const StyledTextArea = styled('textarea')`
   width: 100%;
 `
 
-const Post = ({
+const CreatePost = ({
   inputFile,
   fileUrl,
   supabaseKey,
@@ -86,4 +86,4 @@ const Post = ({
   )
 }
 
-export default Post
+export default CreatePost
