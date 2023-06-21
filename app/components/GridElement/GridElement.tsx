@@ -10,7 +10,7 @@ export interface IGridElement {
 
 const GridElement = ({ height, index, url, width, onClick }: IGridElement) => {
   const handleClick = () => {
-    onClick(index)
+    onClick(index, url)
   }
   return <Image height={height} url={url} width={width} onClick={handleClick} />
 }

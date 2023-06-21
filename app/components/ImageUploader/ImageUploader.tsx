@@ -60,7 +60,7 @@ const ImageUploader = ({
           Create
         </Button>
       </Form>
-      <Modal isOpen={isShown}>
+      <Modal isOpen={isShown} onClose={handleClose}>
         <Form method='post'>
           <CreatePost
             userId={user.id}
