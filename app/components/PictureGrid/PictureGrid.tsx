@@ -1,6 +1,9 @@
 import styled from '@emotion/styled'
 import Box from '../Ui/Box/Box'
 import GridElement from '../GridElement/GridElement'
+import { useState } from 'react'
+import Modal from '../Ui/Modal/Modal'
+import Post from '../Post/Post'
 
 const Grid = styled(Box)`
   display: grid;
@@ -13,7 +16,20 @@ interface IPictureGrid {
 }
 
 const PictureGrid = ({ imgUrl, media }: IPictureGrid) => {
-  console.log(media)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [post, setPost] = useState<any>(null)
+  const [url, setUrl] = useState('')
+
+  const handleOpen = (index: number, url: string) => {
+    setIsModalOpen(true)
+    setPost(media[index])
+    setUrl(url)
+  }
+
+  const handleClose = () => {
+    setIsModalOpen(false)
+  }
+
   return (
     <Grid>
       {media.map((e: any, idx: number) => {
@@ -26,11 +42,14 @@ const PictureGrid = ({ imgUrl, media }: IPictureGrid) => {
               height='310px'
               index={idx}
               url={url}
-              onClick={() => {}}
+              onClick={handleOpen}
             />
           </Box>
         )
       })}
+      <Modal isOpen={isModalOpen} onClose={handleClose}>
+        <Post post={post} url={url} />
+      </Modal>
     </Grid>
   )
 }
