@@ -7,6 +7,7 @@ import Username from '../Username/Username'
 import Box from '../Ui/Box/Box'
 import { useEffect, useState } from 'react'
 import { createClient } from '@supabase/supabase-js'
+import PictureGrid from '../PictureGrid/PictureGrid'
 
 interface IProfile extends Omit<User, 'createdAt' | 'passwordHash' | 'email'> {
   followers?: any
@@ -78,12 +79,13 @@ const Profile = ({
           />
         </Flex>
       </Flex>
-      <Flex flexDirection='row'>
+      <PictureGrid imgUrl={imgUrl} media={media} />
+      {/* <Flex flexDirection='row'>
         {media.map((e: any, idx: number) => {
           const url = imgUrl + '/' + e.name
           return <img width={310} height={310} key={idx} src={url} />
         })}
-      </Flex>
+      </Flex> */}
     </Flex>
   )
 }

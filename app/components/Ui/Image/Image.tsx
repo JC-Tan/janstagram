@@ -5,11 +5,18 @@ interface IImage {
   url?: string
   height?: string
   width?: string
+  onClick?: (...args: any) => any
 }
 
 const StyledImg = styled('img')(border, layout, space)
-const Image = ({ url, ...props }: IImage) => {
-  return <StyledImg {...props} src={url} alt={`/Default_pfp.jpg`} />
+const Image = ({ url, onClick, ...props }: IImage) => {
+  return (
+    <StyledImg
+      {...props}
+      src={url ? url : `/defaultPfP.jpg`}
+      onClick={onClick}
+    />
+  )
 }
 
 export default Image
