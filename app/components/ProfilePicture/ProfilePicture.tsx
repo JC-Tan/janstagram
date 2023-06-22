@@ -1,20 +1,44 @@
+import styled from '@emotion/styled'
+import Box from '../Ui/Box/Box'
 import Flex from '../Ui/Flex'
 import Image from '../Ui/Image/Image'
 
 interface IProfilePictureProps {
+  fHeight?: string
+  fWidth?: string
+  iHeight?: string
+  iWidth?: string
   url?: string
   onClick?: (...args: any) => any
 }
 
-const ProfilePicture = ({ url }: IProfilePictureProps) => {
+const ProfilePicture = ({
+  fHeight = '150px',
+  fWidth = '300px',
+  iHeight = '150px',
+  iWidth = '150px',
+  url,
+}: IProfilePictureProps) => {
   return (
     <Flex
-      height='150px'
-      width='300px'
-      justifyContent='center'
       alignItems='center'
+      height={fHeight}
+      justifyContent='center'
+      width={fWidth}
     >
-      <Image height='150px' width='150px' url={url ? url : '/defaultPfP.jpg'} />
+      <Flex
+        alignItems='center'
+        border='1px solid'
+        borderRadius='50%'
+        justifyContent='center'
+        overflow='hidden'
+      >
+        <Image
+          height={iHeight}
+          url={url ? url : '/defaultPfP.jpg'}
+          width={iWidth}
+        />
+      </Flex>
     </Flex>
   )
 }
