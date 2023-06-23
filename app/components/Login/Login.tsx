@@ -157,9 +157,14 @@ const Login = ({
       >
         {/* Temporary! This should bring us to sign up route!*/}
         <Text fontSize={14} textAlign='15px' lineHeight='18px' m={15}>
-          Don't have account?
+          {action === 'login'
+            ? `Don't have account?`
+            : `Already have an account?`}
         </Text>
-        <Button onClick={handleAction}>Sign up</Button>
+        <Button onClick={handleAction}>
+          {' '}
+          {action === 'login' ? `Sign Up` : `Log in`}
+        </Button>
       </Flex>
     </Flex>
   )
