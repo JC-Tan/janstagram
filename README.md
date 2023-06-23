@@ -1,4 +1,4 @@
-# Welcome to [Janstagram](janstagram.vercel.app)
+# Welcome to [Janstagram](https://janstagram.vercel.app/login?redirectTo=%2F)
 
 ## What is it?
 
