@@ -6,7 +6,7 @@ It's an `Instagram` clone (the website version). Well, it tries to be. I cannot 
 
 ## TODO
 
-Lots of things to do.
+Lots of things to do. If the site crashes, please reload. I promise you it works 🙂
 
 ### Mandatory Features
 
@@ -27,7 +27,7 @@ Lots of things to do.
   - [ ] Fix format
 - [ ] Like pictures
   - [ ] Implement button
-- [ ] TEST FILES lol (i know i know)
+- [ ] TEST FILES lol (i know i know 😅)
 - [ ] Make it look nicer
 
 ### Other Features
