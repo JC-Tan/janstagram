@@ -60,7 +60,12 @@ const ProfileRoute = () => {
       <OverflowFlex width='100%' justifyContent='center'>
         <Flex flexDirection='column'>
           {otherUser ? (
-            <Profile isMyProfile={false} {...otherUser} />
+            <Profile
+              isMyProfile={false}
+              {...otherUser}
+              supabaseUrl={ENV.SUPABASE_URL}
+              supabaseKey={ENV.SUPABASE_KEY}
+            />
           ) : (
             <Text>User does not exist. This should have its own page</Text>
           )}
