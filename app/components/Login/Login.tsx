@@ -132,7 +132,7 @@ const Login = ({
                 error={errors?.username}
                 htmlFor='username'
                 label='Username'
-                value={formData.username}
+                value={formData.username.toLowerCase()}
                 onChange={(e) => handleChange(e, 'username')}
               />
             </>
