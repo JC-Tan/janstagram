@@ -1,13 +1,18 @@
 import { ActionArgs, DataFunctionArgs, redirect } from '@remix-run/node'
 import { requireUserId } from '../server/auth.server'
 import Homepage from '~/components/Homepage/Homepage'
+import { useLoaderData, useMatches } from '@remix-run/react'
+import { feed } from '~/server/features/feed/feed.server'
+import { json } from '@remix-run/node'
 
 export const loader = async ({ request }: DataFunctionArgs) => {
   const res = await requireUserId(request)
+  const feedRes = await feed(res)
+
   if (!res) {
     return redirect('/login')
   }
-  return null
+  return json({ feedRes })
 }
 
 export const action = async ({ request }: ActionArgs) => {
@@ -17,5 +22,15 @@ export const action = async ({ request }: ActionArgs) => {
 }
 
 export default function Index() {
-  return <Homepage />
+  const { user, ENV } = useMatches()[0].data
+  const { feedRes } = useLoaderData()
+
+  return (
+    <Homepage
+      supabaseKey={ENV.SUPABASE_KEY}
+      supabaseUrl={ENV.SUPABASE_URL}
+      feedRes={feedRes}
+      {...user}
+    />
+  )
 }

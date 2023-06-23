@@ -5,9 +5,10 @@ import PostsAndFollow from '../PostsAndFollow/PostsAndFollow'
 import Bio from '../Bio/Bio'
 import Username from '../Username/Username'
 import Box from '../Ui/Box/Box'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { createClient } from '@supabase/supabase-js'
 import PictureGrid from '../PictureGrid/PictureGrid'
+import { dateSort, getImages, getImgUrl } from '~/actions/utils/utils'
 
 interface IProfile extends Omit<User, 'createdAt' | 'passwordHash' | 'email'> {
   followers?: any
@@ -33,31 +34,20 @@ const Profile = ({
 }: IProfile) => {
   const supabase = createClient(supabaseUrl, supabaseKey)
   const [media, setMedia] = useState<any>([])
+  const [imgUrl, setImgUrl] = useState(getImgUrl(supabaseUrl, id))
+
+  const fetchImages = useCallback(async () => {
+    const data = await getImages(supabase, id, 6, 'created_at')
+    setMedia(data)
+  }, [])
 
   useEffect(() => {
-    getImages()
-  }, [])
+    fetchImages()
+  }, [fetchImages])
 
   useEffect(() => {
     posts?.sort((a, b) => dateSort(a.createdAt, b.createdAt))
   }, [posts])
-
-  async function getImages() {
-    const { data, error } = await supabase.storage
-      .from('images')
-      .list(userName + '/', {
-        limit: 10,
-        offset: 0,
-        sortBy: { column: 'name', order: 'asc' },
-      })
-
-    if (data) {
-      setMedia(data.sort((a, b) => dateSort(a.created_at, b.created_at)))
-    } else {
-    }
-  }
-
-  const imgUrl = supabaseUrl + 'storage/v1/object/public/images/' + userName
 
   return (
     <Flex flexDirection='column'>
@@ -91,10 +81,6 @@ const Profile = ({
       />
     </Flex>
   )
-}
-
-const dateSort = (a: string, b: string) => {
-  return Date.parse(b) - Date.parse(a)
 }
 
 export default Profile

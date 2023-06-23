@@ -29,7 +29,7 @@ const ImageUploader = ({
   // Bring image up to sidebar
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.files && e.currentTarget.files[0]) {
-      const url = user.userName + '/' + uuidv4()
+      const url = user.id + '/' + uuidv4()
       setFile(e.currentTarget.files[0])
       setUploadUrl(`${url}`)
       setImageUrl(URL.createObjectURL(e.currentTarget.files[0]))
