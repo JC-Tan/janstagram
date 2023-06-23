@@ -20,7 +20,7 @@ const Modal = ({ isOpen, children, onClose }: IModal) => {
         preventScroll={true}
         onRequestClose={onClose}
       >
-        <Flex justifyContent='center' alignItems='center'>
+        <Flex height='100%' width='100%'>
           {children}
         </Flex>
       </PackageModal>

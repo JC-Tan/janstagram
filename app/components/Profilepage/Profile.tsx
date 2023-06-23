@@ -13,7 +13,7 @@ interface IProfile extends Omit<User, 'createdAt' | 'passwordHash' | 'email'> {
   followers?: any
   following?: any
   isMyProfile: boolean
-  posts?: any
+  posts?: any[]
   supabaseUrl: string
   supabaseKey: string
 }
@@ -38,6 +38,10 @@ const Profile = ({
     getImages()
   }, [])
 
+  useEffect(() => {
+    posts?.sort((a, b) => dateSort(a.createdAt, b.createdAt))
+  }, [posts])
+
   async function getImages() {
     const { data, error } = await supabase.storage
       .from('images')
@@ -48,7 +52,7 @@ const Profile = ({
       })
 
     if (data) {
-      setMedia(data)
+      setMedia(data.sort((a, b) => dateSort(a.created_at, b.created_at)))
     } else {
     }
   }
@@ -79,15 +83,18 @@ const Profile = ({
           />
         </Flex>
       </Flex>
-      <PictureGrid imgUrl={imgUrl} media={media} />
-      {/* <Flex flexDirection='row'>
-        {media.map((e: any, idx: number) => {
-          const url = imgUrl + '/' + e.name
-          return <img width={310} height={310} key={idx} src={url} />
-        })}
-      </Flex> */}
+      <PictureGrid
+        imgUrl={imgUrl}
+        media={media}
+        posts={posts}
+        username={userName}
+      />
     </Flex>
   )
+}
+
+const dateSort = (a: string, b: string) => {
+  return Date.parse(b) - Date.parse(a)
 }
 
 export default Profile

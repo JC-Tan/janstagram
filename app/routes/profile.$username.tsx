@@ -1,3 +1,4 @@
+import styled from '@emotion/styled'
 import { ActionArgs, LoaderArgs, json } from '@remix-run/node'
 import { useLoaderData, useMatches } from '@remix-run/react'
 import Profile from '~/components/Profilepage/Profile'
@@ -46,13 +47,17 @@ export const action = async ({ request }: ActionArgs) => {
   }
 }
 
+const OverflowFlex = styled(Flex)`
+  overflow: scroll;
+`
+
 const ProfileRoute = () => {
   let { otherUser } = useLoaderData()
   const { ENV } = useMatches()[0].data
   return (
     <Flex height='100%'>
       <Sidebar supabaseUrl={ENV.SUPABASE_URL} supabaseKey={ENV.SUPABASE_KEY} />
-      <Flex width='100%' justifyContent='center'>
+      <OverflowFlex width='100%' justifyContent='center'>
         <Flex flexDirection='column'>
           {otherUser ? (
             <Profile isMyProfile={false} {...otherUser} />
@@ -60,7 +65,7 @@ const ProfileRoute = () => {
             <Text>User does not exist. This should have its own page</Text>
           )}
         </Flex>
-      </Flex>
+      </OverflowFlex>
     </Flex>
   )
 }
