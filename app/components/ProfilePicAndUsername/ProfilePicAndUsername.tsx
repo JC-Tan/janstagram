@@ -18,7 +18,7 @@ const ProfilePicAndUsername = ({ url, username }: IProfilePicAndUsername) => {
         iWidth='32px'
         url={url}
       />
-      <Box ml={14}>
+      <Box ml={2}>
         <Text>{username}</Text>
       </Box>
     </Flex>

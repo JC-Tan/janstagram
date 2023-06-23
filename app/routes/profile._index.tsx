@@ -4,6 +4,7 @@ import Flex from '~/components/Ui/Flex'
 import Profile from '~/components/Profilepage'
 import { ActionArgs } from '@remix-run/node'
 import { post } from '~/server/features/post/post.server'
+import styled from '@emotion/styled'
 
 export const action = async ({ request }: ActionArgs) => {
   const form = await request.formData()
@@ -21,16 +22,21 @@ export const action = async ({ request }: ActionArgs) => {
   return null
 }
 
+const OverflowFlex = styled(Flex)`
+  overflow: scroll;
+`
+
 const ProfileRoute = () => {
   const { user, ENV } = useMatches()[0].data
 
   if (!user) {
     return
   }
+
   return (
     <Flex height='100%'>
       <Sidebar supabaseUrl={ENV.SUPABASE_URL} supabaseKey={ENV.SUPABASE_KEY} />
-      <Flex width='100%' justifyContent='center'>
+      <OverflowFlex width='100%' justifyContent='center'>
         <Flex flexDirection='column'>
           <Profile
             isMyProfile={true}
@@ -39,7 +45,7 @@ const ProfileRoute = () => {
             supabaseKey={ENV.SUPABASE_KEY}
           />
         </Flex>
-      </Flex>
+      </OverflowFlex>
     </Flex>
   )
 }

@@ -13,17 +13,25 @@ const Grid = styled(Box)`
 interface IPictureGrid {
   imgUrl: string
   media: any[]
+  posts: any[]
+  username: string
 }
 
-const PictureGrid = ({ imgUrl, media }: IPictureGrid) => {
+const PictureGrid = ({ imgUrl, media, posts, username }: IPictureGrid) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [post, setPost] = useState<any>(null)
   const [url, setUrl] = useState('')
+  const [post, setPost] = useState({
+    caption: '',
+    createdAt: '',
+  })
 
   const handleOpen = (index: number, url: string) => {
     setIsModalOpen(true)
-    setPost(media[index])
     setUrl(url)
+    setPost({
+      caption: posts[index]?.caption,
+      createdAt: posts[index]?.createdAt,
+    })
   }
 
   const handleClose = () => {
@@ -48,7 +56,12 @@ const PictureGrid = ({ imgUrl, media }: IPictureGrid) => {
         )
       })}
       <Modal isOpen={isModalOpen} onClose={handleClose}>
-        <Post post={post} url={url} />
+        <Post
+          imgUrl={url}
+          post={post}
+          profImgUrl='/pikachu.png'
+          username={username}
+        />
       </Modal>
     </Grid>
   )
