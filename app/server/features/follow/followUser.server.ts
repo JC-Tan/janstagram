@@ -52,7 +52,7 @@ export const unfollow = async (userId: string, otherId: string) => {
       id: userId,
     },
     data: {
-      followers: {
+      following: {
         disconnect: {
           id: otherId,
         },

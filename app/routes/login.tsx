@@ -1,6 +1,6 @@
 import { LoaderArgs, redirect } from '@remix-run/node'
 import { useActionData } from '@remix-run/react'
-import login from '~/actions/login'
+import login from '~/actions/login/login'
 import LoginComponent from '~/components/Login/Login'
 import { getUser } from '~/server/auth.server'
 
