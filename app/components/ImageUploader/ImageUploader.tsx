@@ -47,33 +47,29 @@ const ImageUploader = ({
 
   return (
     <Box>
-      <Form method='post'>
-        <Input
-          type='file'
-          name='inputFile'
-          ref={fileInputRef}
-          accept='image/*'
-          onChange={handleChange}
-          hidden
-        />
-        <Button mt={12} onClick={handleClick}>
-          Create
-        </Button>
-      </Form>
+      <Input
+        type='file'
+        name='inputFile'
+        ref={fileInputRef}
+        accept='image/*'
+        onChange={handleChange}
+        hidden
+      />
+      <Button mt={12} onClick={handleClick}>
+        Create
+      </Button>
       <Modal isOpen={isShown} onClose={handleClose}>
-        <Form method='post'>
-          <CreatePost
-            userId={user.id}
-            inputFile={inputFile}
-            fileUrl={imageUrl}
-            profilePic='/defaultPfP.jpg'
-            supabaseKey={supabaseKey}
-            supabaseUrl={supabaseUrl}
-            uploadUrl={uploadUrl}
-            username={user.userName}
-            onClose={handleClose}
-          />
-        </Form>
+        <CreatePost
+          userId={user.id}
+          inputFile={inputFile}
+          fileUrl={imageUrl}
+          profilePic='/defaultPfP.jpg'
+          supabaseKey={supabaseKey}
+          supabaseUrl={supabaseUrl}
+          uploadUrl={uploadUrl}
+          username={user.userName}
+          onClose={handleClose}
+        />
       </Modal>
     </Box>
   )

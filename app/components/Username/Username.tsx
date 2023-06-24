@@ -24,10 +24,6 @@ const Username = ({ followers, id, isMyProfile, username }: IUsername) => {
       : setButtonText('Edit profile')
   }, [followers])
 
-  useEffect(() => {
-    console.log(fetcher.data)
-  }, [fetcher.data])
-
   const handleFollow = () => {
     const data = new FormData()
     data.append(

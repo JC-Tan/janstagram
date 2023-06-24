@@ -1,11 +1,12 @@
 import { ActionArgs, json } from '@remix-run/node'
 import { follow, unfollow } from '~/server/features/follow/followUser.server'
+import { share } from '../share/share'
 
-export const followUnfollow = async ({ request }: ActionArgs) => {
+export const otherProfileAction = async ({ request }: ActionArgs) => {
   const form = await request.formData()
   const data = JSON.parse(form.get('json') as string)
-  const userId = data.userId as string
-  const id = data.id as string
+  const userId = data?.userId as string
+  const id = data?.id as string
 
   try {
     switch (data._action) {
@@ -25,6 +26,8 @@ export const followUnfollow = async ({ request }: ActionArgs) => {
           })
         }
         return json({ unfollowRes })
+      case 'share':
+        return await share(data)
       default:
         return json({
           error: 'Invalid follow action',

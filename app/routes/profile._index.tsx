@@ -2,24 +2,26 @@ import { useMatches } from '@remix-run/react'
 import Sidebar from '~/components/Sidebar'
 import Flex from '~/components/Ui/Flex'
 import Profile from '~/components/Profilepage'
-import { ActionArgs } from '@remix-run/node'
-import { post } from '~/server/features/post/post.server'
+import { ActionArgs, json } from '@remix-run/node'
 import styled from '@emotion/styled'
+import { share } from '~/actions/share/share'
 
 export const action = async ({ request }: ActionArgs) => {
   const form = await request.formData()
-  const action = form.get('_action')
-  let userId = form.get('userId')
-  let url = form.get('uploadUrl')
-  let caption = form.get('caption')
+  const data = JSON.parse(form.get('json') as string)
 
-  if (action === 'share') {
-    userId = userId as string
-    url = url as string
-    caption = caption as string
-    return await post(userId, url, caption)
+  try {
+    switch (data._action) {
+      case 'share':
+        return await share(data)
+      default:
+        return json({
+          error: 'Invalid follow action',
+        })
+    }
+  } catch (error) {
+    return json({ error: `Failed to ${data._action} user` })
   }
-  return null
 }
 
 const OverflowFlex = styled(Flex)`

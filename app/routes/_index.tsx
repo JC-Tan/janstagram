@@ -4,6 +4,8 @@ import Homepage from '~/components/Homepage/Homepage'
 import { useLoaderData, useMatches } from '@remix-run/react'
 import { feed } from '~/server/features/feed/feed.server'
 import { json } from '@remix-run/node'
+import { post } from '~/server/features/post/post.server'
+import { share } from '~/actions/share/share'
 
 export const loader = async ({ request }: DataFunctionArgs) => {
   const res = await requireUserId(request)
@@ -17,8 +19,20 @@ export const loader = async ({ request }: DataFunctionArgs) => {
 
 export const action = async ({ request }: ActionArgs) => {
   const form = await request.formData()
-  const action = form.get('_action')
-  return null
+  const data = JSON.parse(form.get('json') as string)
+
+  try {
+    switch (data._action) {
+      case 'share':
+        return await share(data)
+      default:
+        return json({
+          error: 'Invalid follow action',
+        })
+    }
+  } catch (error) {
+    return json({ error: `Failed to ${data._action} user` })
+  }
 }
 
 export default function Index() {
