@@ -66,9 +66,11 @@ const ImageUploader = ({
             userId={user.id}
             inputFile={inputFile}
             fileUrl={imageUrl}
+            profilePic='/defaultPfP.jpg'
             supabaseKey={supabaseKey}
             supabaseUrl={supabaseUrl}
             uploadUrl={uploadUrl}
+            username={user.userName}
             onClose={handleClose}
           />
         </Form>

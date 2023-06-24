@@ -6,37 +6,45 @@ import Button from '../Ui/Button'
 import Input from '../Ui/Input'
 import { createClient } from '@supabase/supabase-js'
 import Image from '../Ui/Image/Image'
+import ProfilePicAndUsername from '../ProfilePicAndUsername/ProfilePicAndUsername'
+import Text from '../Ui/Text/Text'
 
-interface IPost {
+export interface ICreatePost {
   inputFile: File
   fileUrl: string
+  profilePic: string
   supabaseUrl: string
   supabaseKey: string
   uploadUrl: string
   userId: string
+  username: string
   onClose: () => void
 }
 
 const StyledTextArea = styled('textarea')`
   resize: none;
   width: 100%;
+  border: none;
+  outline: none;
 `
 
 const CreatePost = ({
   inputFile,
   fileUrl,
+  profilePic,
   supabaseKey,
   supabaseUrl,
   uploadUrl,
   userId,
+  username,
   onClose,
-}: IPost) => {
+}: ICreatePost) => {
   const supabase = createClient(supabaseUrl, supabaseKey)
 
-  const [bio, setBio] = useState('')
+  const [caption, setCaption] = useState('')
 
   const handleBio = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setBio(e.target.value)
+    setCaption(e.target.value)
   }
 
   const handleShare = async () => {
@@ -56,31 +64,55 @@ const CreatePost = ({
   }
 
   return (
-    <Flex flexDirection='row'>
-      <Flex height='700px' width='700px'>
-        <Image url={fileUrl} />
-      </Flex>
-      <Flex flexDirection='column'>
-        <Flex flexDirection='column' width='350px' height='450px'>
-          <Box m={20}>Hello</Box>
-          <Flex height='100%' width='100%'>
-            <StyledTextArea name='bio' onChange={handleBio} value={bio} />
-          </Flex>
-        </Flex>
+    <Flex flexDirection='column' width='100%'>
+      <Flex
+        flexDirection='row-reverse'
+        justifyContent='space-between'
+        alignItems='center'
+      >
         <Input name='userId' defaultValue={userId} hidden />
         <Input name='uploadUrl' defaultValue={uploadUrl} hidden />
         <Button
           name='_action'
           value='share'
           type='submit'
-          my={20}
+          my={2}
           onClick={handleShare}
         >
           Share
         </Button>
-        <Button mb={20} onClick={onClose}>
-          Close me
+        <Text>Creat new post</Text>
+        <Button my={2} onClick={onClose}>
+          Cancel
         </Button>
+      </Flex>
+      <Flex
+        flexDirection='row'
+        alignItems='stretch'
+        borderTop='1px solid #606770'
+      >
+        <Flex
+          justifyContent='center'
+          borderRight='1px solid #606770'
+          flex='2 1 0'
+        >
+          <Image url={fileUrl} />
+        </Flex>
+        <Flex flexDirection='column' flex='1 1 0'>
+          <Flex flexDirection='column' flex='1 1 0'>
+            <Box mt={3} mx={3}>
+              <ProfilePicAndUsername url={profilePic} username={username} />
+            </Box>
+            <Flex mx={3} flex='2 1 0'>
+              <StyledTextArea
+                name='caption'
+                placeholder='Write a caption...'
+                onChange={handleBio}
+                value={caption}
+              />
+            </Flex>
+          </Flex>
+        </Flex>
       </Flex>
     </Flex>
   )
