@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Flex from '../Ui/Flex'
 import Box from '../Ui/Box/Box'
 import styled from 'styled-components'
@@ -8,6 +8,7 @@ import { createClient } from '@supabase/supabase-js'
 import Image from '../Ui/Image/Image'
 import ProfilePicAndUsername from '../ProfilePicAndUsername/ProfilePicAndUsername'
 import Text from '../Ui/Text/Text'
+import { useFetcher } from '@remix-run/react'
 
 export interface ICreatePost {
   inputFile: File
@@ -41,9 +42,16 @@ const CreatePost = ({
 }: ICreatePost) => {
   const supabase = createClient(supabaseUrl, supabaseKey)
 
+  const fetcher = useFetcher()
   const [caption, setCaption] = useState('')
 
-  const handleBio = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  useEffect(() => {
+    if (fetcher.data) {
+      onClose()
+    }
+  }, [fetcher.data])
+
+  const handleCaption = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCaption(e.target.value)
   }
 
@@ -54,7 +62,17 @@ const CreatePost = ({
         .upload(uploadUrl, inputFile)
 
       if (data) {
-        console.log('upload successful')
+        const actionData = new FormData()
+        actionData.append(
+          'json',
+          JSON.stringify({
+            _action: 'share',
+            caption: caption,
+            userId: userId,
+            uploadUrl: uploadUrl,
+          })
+        )
+        fetcher.submit(actionData, { method: 'post' })
       } else {
         throw new Error(error.message)
       }
@@ -70,8 +88,6 @@ const CreatePost = ({
         justifyContent='space-between'
         alignItems='center'
       >
-        <Input name='userId' defaultValue={userId} hidden />
-        <Input name='uploadUrl' defaultValue={uploadUrl} hidden />
         <Button
           name='_action'
           value='share'
@@ -107,7 +123,7 @@ const CreatePost = ({
               <StyledTextArea
                 name='caption'
                 placeholder='Write a caption...'
-                onChange={handleBio}
+                onChange={handleCaption}
                 value={caption}
               />
             </Flex>

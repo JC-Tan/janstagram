@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { LoaderArgs, json } from '@remix-run/node'
 import { useLoaderData, useMatches } from '@remix-run/react'
-import { followUnfollow } from '~/actions/followUnfollow/followUnfollow'
+import { otherProfileAction } from '~/actions/otherProfile/otherProfile'
 import Profile from '~/components/Profilepage/Profile'
 import Sidebar from '~/components/Sidebar/Sidebar'
 import Flex from '~/components/Ui/Flex/Flex'
@@ -17,7 +17,7 @@ export const loader = async ({ params }: LoaderArgs) => {
   return json({ otherUser })
 }
 
-export const action = followUnfollow
+export const action = otherProfileAction
 
 const OverflowFlex = styled(Flex)`
   overflow: scroll;
