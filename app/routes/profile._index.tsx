@@ -11,13 +11,13 @@ export const action = async ({ request }: ActionArgs) => {
   const action = form.get('_action')
   let userId = form.get('userId')
   let url = form.get('uploadUrl')
-  let bio = form.get('bio')
+  let caption = form.get('caption')
 
   if (action === 'share') {
     userId = userId as string
     url = url as string
-    bio = bio as string
-    return await post(userId, url, bio)
+    caption = caption as string
+    return await post(userId, url, caption)
   }
   return null
 }
