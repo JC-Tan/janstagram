@@ -1,5 +1,6 @@
 # Welcome to [Janstagram](https://janstagram.vercel.app/login?redirectTo=%2F)
 
+- Sign up and then log in. Search for `tanjc` and follow me (or not)
 ## What is it?
 
 It's an `Instagram` clone (the website version). Well, it tries to be. I cannot emphasize enough that this is the website version of Instagram. It will not look good if you open it on your phone (not yet).
