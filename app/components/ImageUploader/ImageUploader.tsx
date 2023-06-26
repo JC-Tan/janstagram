@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import Input from '../Ui/Input/Input'
 import Button from '../Ui/Button'
-import Box from '../Ui/Box/Box'
+import Flex from '../Ui/Flex/Flex'
 import { v4 as uuidv4 } from 'uuid'
 import { Form, useMatches } from '@remix-run/react'
 import Modal from '../Ui/Modal/Modal'
@@ -46,7 +46,7 @@ const ImageUploader = ({
   }
 
   return (
-    <Box>
+    <Flex>
       <Input
         type='file'
         name='inputFile'
@@ -55,7 +55,7 @@ const ImageUploader = ({
         onChange={handleChange}
         hidden
       />
-      <Button mt={12} onClick={handleClick}>
+      <Button width='100%' onClick={handleClick}>
         Create
       </Button>
       <Modal isOpen={isShown} onClose={handleClose}>
@@ -71,7 +71,7 @@ const ImageUploader = ({
           onClose={handleClose}
         />
       </Modal>
-    </Box>
+    </Flex>
   )
 }
 
