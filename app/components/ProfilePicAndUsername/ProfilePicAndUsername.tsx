@@ -1,7 +1,7 @@
 import ProfilePicture from '../ProfilePicture/ProfilePicture'
+import StyledLink from '../StyledLink/StyledLink'
 import Box from '../Ui/Box/Box'
 import Flex from '../Ui/Flex/Flex'
-import Text from '../Ui/Text/Text'
 
 export interface IProfilePicAndUsername {
   url: string
@@ -19,7 +19,11 @@ const ProfilePicAndUsername = ({ url, username }: IProfilePicAndUsername) => {
         url={url}
       />
       <Box ml={2}>
-        <Text>{username}</Text>
+        <StyledLink
+          color='#333333'
+          to={`/profile/${username}`}
+          text={username}
+        />
       </Box>
     </Flex>
   )

@@ -8,6 +8,7 @@ interface IButtonIcon extends IButtonProps {
   isProfileTab?: boolean
   url: string
   value: string
+  variant?: string
   onClick: (...args: any) => any
 }
 
@@ -16,6 +17,7 @@ const ButtonIcon = ({
   isProfileTab = false,
   url,
   value,
+  variant = 'secondary',
   onClick,
   ...props
 }: IButtonIcon) => {
@@ -24,7 +26,7 @@ const ButtonIcon = ({
       <Button
         name='_action'
         value={value}
-        variant='secondary'
+        variant={variant}
         width='100%'
         onClick={onClick}
         {...props}
@@ -37,7 +39,7 @@ const ButtonIcon = ({
           >
             <Image width='24px' height='24px' url={url} />
           </Flex>
-          <Text ml={3}>{buttonLabel}</Text>
+          {buttonLabel && <Text ml={3}>{buttonLabel}</Text>}
         </Flex>
       </Button>
     </Flex>

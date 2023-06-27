@@ -20,7 +20,16 @@ export default {
       color: 'none',
       bg: '#ffffff',
       '&:hover': {
-        bg: '#cacaca',
+        bg: '#f8f8ff',
+      },
+    },
+    like: {
+      ...buttonStyles,
+      color: 'none',
+      padding: 'none',
+      bg: '#ffffff',
+      '&:hover': {
+        bg: '#f8f8ff',
       },
     },
   },
