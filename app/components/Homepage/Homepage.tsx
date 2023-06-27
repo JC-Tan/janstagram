@@ -1,7 +1,7 @@
 import Sidebar from '../Sidebar/Sidebar'
 import Flex from '../Ui/Flex/Flex'
 import { getImgUrl } from '~/actions/utils/utils'
-import GridElement from '../GridElement/GridElement'
+import FeedElement from '../FeedElement/FeedElement'
 
 interface IHomepage {
   feedRes: any[]
@@ -22,14 +22,7 @@ const Homepage = ({ feedRes, id, supabaseKey, supabaseUrl }: IHomepage) => {
         {feedRes.map((e, idx) => {
           const imgUrl = getImgUrl(supabaseUrl, e.media[0].url)
           return (
-            <GridElement
-              height='400px'
-              index={idx}
-              key={idx}
-              width='400px'
-              url={imgUrl}
-              onClick={() => {}}
-            />
+            <FeedElement feedElement={e} key={idx} iUrl={imgUrl} idx={idx} />
           )
         })}
       </Flex>
