@@ -14,6 +14,7 @@ import { IMainProps } from '../IMainProps'
 import theme from '../theme'
 
 export interface IButtonProps extends IMainProps {
+  variant?: string
   onClick?: (...args: any) => any
   children?: ReactNode
 }
@@ -23,9 +24,9 @@ const StyledButton = styled('button')(
   variant(theme)
 )
 
-const Button = ({ onClick, children, ...props }: IButtonProps) => {
+const Button = ({ variant, onClick, children, ...props }: IButtonProps) => {
   return (
-    <StyledButton {...props} onClick={onClick}>
+    <StyledButton variant={variant} {...props} onClick={onClick}>
       {children}
     </StyledButton>
   )

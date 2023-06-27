@@ -1,18 +1,19 @@
 import Flex from '../Ui/Flex/Flex'
-import Button from '../Ui/Button/Button'
 import { useFetcher } from '@remix-run/react'
 import { useState } from 'react'
 import ImageUploader from '../ImageUploader/ImageUploader'
 import Input from '../Ui/Input/Input'
 import { convertToJson } from '~/actions/utils/convertToJson/convertToJson'
 import Modal from '../Ui/Modal/Modal'
+import ButtonIcon from '../ButtonIcon/ButtonIcon'
 
 interface ISidebar {
+  profilePicUrl?: string
   supabaseUrl: string
   supabaseKey: string
 }
 
-const Sidebar = ({ supabaseKey, supabaseUrl }: ISidebar) => {
+const Sidebar = ({ profilePicUrl, supabaseKey, supabaseUrl }: ISidebar) => {
   const [profile, setProfile] = useState('')
   const [isSearchOpen, setIsSearchOpen] = useState(false)
 
@@ -63,19 +64,32 @@ const Sidebar = ({ supabaseKey, supabaseUrl }: ISidebar) => {
       width='275px'
       p={12}
     >
-      <Button name='_action' value='home' onClick={handleHome}>
-        Home
-      </Button>
-      <Button name='_action' value='search' onClick={handleSearch}>
-        Search
-      </Button>
+      <ButtonIcon
+        buttonLabel='Home'
+        url='/icons/home.png'
+        value='home'
+        onClick={handleHome}
+      />
+      <ButtonIcon
+        buttonLabel='Search'
+        url='/icons/search.png'
+        value='search'
+        onClick={handleSearch}
+      />
       <ImageUploader supabaseUrl={supabaseUrl} supabaseKey={supabaseKey} />
-      <Button name='_action' value='profile' onClick={handleProfile}>
-        Profile
-      </Button>
-      <Button name='_action' value='logout' onClick={handleLogout}>
-        Log out
-      </Button>
+      <ButtonIcon
+        buttonLabel='Profile'
+        isProfileTab
+        url='/defaultPfp.jpg'
+        value='profile'
+        onClick={handleProfile}
+      />
+      <ButtonIcon
+        buttonLabel='Log out'
+        url='/icons/logout.svg'
+        value='logout'
+        onClick={handleLogout}
+      />
       <Modal isOpen={isSearchOpen} onClose={requestSearchClose}>
         <Flex width='100%'>
           <Input

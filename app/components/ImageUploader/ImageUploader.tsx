@@ -1,25 +1,19 @@
 import { useRef, useState } from 'react'
 import Input from '../Ui/Input/Input'
-import Button from '../Ui/Button'
-import Flex from '../Ui/Flex/Flex'
 import { v4 as uuidv4 } from 'uuid'
-import { Form, useMatches } from '@remix-run/react'
+import { useMatches } from '@remix-run/react'
 import Modal from '../Ui/Modal/Modal'
 import CreatePost from '../CreatePost/CreatePost'
+import ButtonIcon from '../ButtonIcon'
+import Box from '../Ui/Box/Box'
 
 interface IImageUploader {
   supabaseUrl: string
   supabaseKey: string
-  onChange?: (file: File) => any
 }
 
-const ImageUploader = ({
-  supabaseKey,
-  supabaseUrl,
-  onChange,
-}: IImageUploader) => {
+const ImageUploader = ({ supabaseKey, supabaseUrl }: IImageUploader) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
-  const dropRef = useRef(null)
   const [imageUrl, setImageUrl] = useState('')
   const [uploadUrl, setUploadUrl] = useState('')
   const [isShown, setIsShown] = useState(false)
@@ -46,7 +40,7 @@ const ImageUploader = ({
   }
 
   return (
-    <Flex>
+    <Box>
       <Input
         type='file'
         name='inputFile'
@@ -55,9 +49,13 @@ const ImageUploader = ({
         onChange={handleChange}
         hidden
       />
-      <Button width='100%' onClick={handleClick}>
-        Create
-      </Button>
+      <ButtonIcon
+        buttonLabel='Create'
+        url='/icons/add.png'
+        value='create'
+        onClick={handleClick}
+      />
+
       <Modal isOpen={isShown} onClose={handleClose}>
         <CreatePost
           userId={user.id}
@@ -71,7 +69,7 @@ const ImageUploader = ({
           onClose={handleClose}
         />
       </Modal>
-    </Flex>
+    </Box>
   )
 }
 
